@@ -1,6 +1,6 @@
-#include "../../inc/base.h"
+#include "../inc/base.h"
 
-vector_t *create( size_t size ) {
+vector_t *createV( size_t size ) {
   vector_t *vec;
 
   if( 0 > size ) {
@@ -28,7 +28,7 @@ vector_t *create( size_t size ) {
   return vec;
 }
 
-matrix_t *create( size_t row, size_t col ) {
+matrix_t *createM( size_t row, size_t col ) {
   size_t i, j;
   matrix_t *mat;
 
@@ -72,13 +72,13 @@ matrix_t *create( size_t row, size_t col ) {
   return mat;
 }
 
-void release( vector_t *vec ) {
+void releaseV( vector_t *vec ) {
   free( vec->data );
   free( vec );
   return;
 }
 
-void release( matrix_t *mat ) {
+void releaseM( matrix_t *mat ) {
   size_t i;
 
   for( i=0 ; i < mat->row ; ++i )
