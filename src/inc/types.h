@@ -6,6 +6,9 @@
  * @copyright free software
  */
 
+#ifndef TYPES_H
+#define TYPES_H 
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -16,14 +19,19 @@ typedef enum {
 } bool_t;
 
 //! vector data structure
-typedef struct {
+struct vector_t {
   size_t size;  /**< vector element size */
   double *data; /**< vector data array */
-} vector_t;
+};
 
 //! matrix data structure
-typedef struct {
+struct matrix_t {
   size_t row;    /**< matrix row size */
   size_t col;    /**< matrix column size */
   double **data;  /**< matrix data array */
-} matrix_t;
+};
+
+typedef struct vector_t * vector_t;
+typedef struct matrix_t * matrix_t;
+
+#endif

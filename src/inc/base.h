@@ -8,30 +8,41 @@
 
 #include "types.h"
 
-#ifndef TYPES_H
-#define TYPES_H
+#ifndef BASE_H
+#define BASE_H
 
 #define LIBALG_ERR( msg ) fprintf( stderr, "%s\n", msg ) 
 
 /// \brief function that creates a vector
 /// @param len - vector element size
 /// @return if vector is created, return the vector. Otherwise, return NULL.
-vector_t *createV( size_t size );
+vector_t createV( size_t size );
 
 /// \brief funtion that creates a matrix
 /// @param row - matrix row size
 /// @param col - matrix column size
 /// @return if matrix is created, return the matrix. Otherwise, return NULL.
-matrix_t *createM( size_t row, size_t col );
+matrix_t createM( size_t row, size_t col );
 
 /// \brief function that releases vector
 /// @param vec - vector
 /// @return -
-void releaseV( vector_t *vec );
+void releaseV( vector_t vec );
 
 /// \brief function that releases matrix
 /// @param mat - matrix
 /// @return -
-void releaseM( matrix_t *mat );
+void releaseM( matrix_t mat );
+
+/// \brief function that fills vector with parameter
+/// @param vec - vector
+/// @param param - parameter
+/// @return -
+void fillV( vector_t vec, double param );
+
+/// \brief function that prints vector
+/// @param vec - vector
+/// @return -
+void printV( vector_t vec );
 
 #endif
