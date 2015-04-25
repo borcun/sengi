@@ -1,8 +1,8 @@
 CC = gcc
 INC = src/inc/
 SRC = src/base/*.c src/util/*.c
-OBJ = *.o
-LIB = *.so
+OBJ = src/*.o
+LIB = lib/*.a
 RM = rm
 AR = ar
 MV = mv
@@ -13,4 +13,4 @@ all: ${SRC}
 	${AR} -cvq lib/libbase.a src/base.o
 
 clean: ${OBJ}
-	${RM} -rf ${OBJ}
+	${RM} -rf ${OBJ} ${LIB}

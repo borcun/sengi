@@ -1,14 +1,18 @@
 #include "base.h"
 
 int main() {
-	vector_t vec = createV( 3 );
-	matrix_t mat = createM( 2, 3 );
+	vector_t vec = create_v( 3 );
+	matrix_t mat = create_m( 2, 3 );
 
-	fillV( vec, 5 );
-	printV( vec );
+	fill_v( vec, 5 );
+	fill_m( mat, 4 );
 
-	releaseV( vec );
-	releaseM( mat );
+	print_v( vec );
+	printf("\n");
+	print_m( mat );
+
+	release_v( vec );
+	release_m( mat );
 
 	return 0;
 }

@@ -26,7 +26,9 @@ struct matrix ( zeros, ones, hessian matrix, computer vision special matrices et
 
 base.h
 ======
-arithmetic operations, inverse, transpose, diagonal, reverse vector, ones and zeros functions
+arithmetic operations, inverse, transpose, diagonal, reverse vector
+fill and to_array functions
+file operations ( read from file, write to file ... )
 
 libalg.h
 =========

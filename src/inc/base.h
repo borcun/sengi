@@ -16,33 +16,44 @@
 /// \brief function that creates a vector
 /// @param len - vector element size
 /// @return if vector is created, return the vector. Otherwise, return NULL.
-vector_t createV( size_t size );
+vector_t create_v( size_t size );
 
 /// \brief funtion that creates a matrix
 /// @param row - matrix row size
 /// @param col - matrix column size
 /// @return if matrix is created, return the matrix. Otherwise, return NULL.
-matrix_t createM( size_t row, size_t col );
+matrix_t create_m( size_t row, size_t col );
 
 /// \brief function that releases vector
 /// @param vec - vector
 /// @return -
-void releaseV( vector_t vec );
+void release_v( vector_t vec );
 
 /// \brief function that releases matrix
 /// @param mat - matrix
 /// @return -
-void releaseM( matrix_t mat );
+void release_m( matrix_t mat );
 
-/// \brief function that fills vector with parameter
+/// \brief function that fills vector with value
 /// @param vec - vector
+/// @param val - value
+/// @return -
+void fill_v( vector_t vec, double val );
+
+/// \brief function that fills matrix with value
+/// @param mat - matrix
 /// @param param - parameter
 /// @return -
-void fillV( vector_t vec, double param );
+void fill_m( matrix_t mat, double param );
 
 /// \brief function that prints vector
 /// @param vec - vector
 /// @return -
-void printV( vector_t vec );
+void print_v( vector_t vec );
+
+/// \brief function that prints matrix
+/// @param mat - matrix
+/// @return -
+void print_m( matrix_t m );
 
 #endif

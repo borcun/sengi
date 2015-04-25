@@ -1,6 +1,6 @@
 #include "../inc/base.h"
 
-vector_t createV( size_t size ) {
+vector_t create_v( size_t size ) {
   vector_t vec;
 
   if( 0 > size ) {
@@ -28,7 +28,7 @@ vector_t createV( size_t size ) {
   return vec;
 }
 
-matrix_t createM( size_t row, size_t col ) {
+matrix_t create_m( size_t row, size_t col ) {
   size_t i, j;
   matrix_t mat;
 
@@ -72,13 +72,13 @@ matrix_t createM( size_t row, size_t col ) {
   return mat;
 }
 
-void releaseV( vector_t vec ) {
+void release_v( vector_t vec ) {
   free( vec->data );
   free( vec );
   return;
 }
 
-void releaseM( matrix_t mat ) {
+void release_m( matrix_t mat ) {
   size_t i;
 
   for( i=0 ; i < mat->row ; ++i )
@@ -88,22 +88,50 @@ void releaseM( matrix_t mat ) {
   return;
 }
 
-void fillV( vector_t vec, double param ) {
+void fill_v( vector_t vec, double val ) {
 	size_t i;
 
 	for( i=0 ; i < vec->size ; ++i )
-		vec->data[ i ] = param;
+		vec->data[ i ] = val;
 
 	return;
 }
 
-void printV( vector_t vec ) {
+void fill_m( matrix_t mat, double val ) {
+	size_t i, j;
+
+	for( i=0 ; i < mat->row ; ++i ) {
+		for( j=0 ; j < mat->col ; ++j ) {
+			mat->data[ i ][ j ] = val;
+		}
+	}
+
+	return;
+}
+
+void print_v( vector_t vec ) {
 	size_t i;
 
-	printf( "[ " ); 
+	fprintf( stdout, "%s", "| " ); 
 	for( i=0 ; i < vec->size ; ++i )
-		printf( "%f ", vec->data[ i ] ); 
-	printf( "]" );
+		fprintf( stdout, "%f ", vec->data[ i ] ); 
+	fprintf( stdout, "%s\n", "|" );
+
+	return;
+}
+
+void print_m( matrix_t mat ) {
+	size_t i, j;
+
+	for( i=0 ; i < mat->row ; ++i ) {
+		fprintf( stdout, "%s", "| ");
+
+		for( j=0 ; j < mat->col ; ++j ) {
+			fprintf( stdout, "%f ", mat->data[ i ][ j ] );
+		}
+
+		fprintf( stdout, "%s\n", "|" );
+	}
 
 	return;
 }
