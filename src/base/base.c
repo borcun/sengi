@@ -1,6 +1,6 @@
 #include "../inc/base.h"
 
-vector_t create_v( size_t size ) {
+vector_t create_rv( size_t size ) {
   vector_t vec;
 
   if( 0 > size ) {
@@ -23,6 +23,36 @@ vector_t create_v( size_t size ) {
     return NULL;
   }
 
+	vec->vt = RVEC;
+  vec->size = size;
+    
+  return vec;
+}
+
+vector_t create_cv( size_t size ) {
+  vector_t vec;
+
+  if( 0 > size ) {
+    LIBALG_ERR( "vector size is invalid" );
+    return NULL;
+  }
+  
+  vec = ( vector_t ) malloc( sizeof( struct vector_t ) );
+
+  if( NULL == vec ) {
+    LIBALG_ERR( "creating vector is failed" );
+    return NULL;
+  }
+  
+  vec->data = ( double * ) malloc( size * sizeof( double ) );
+
+  if( NULL == vec->data ) {
+    LIBALG_ERR( "creating vector is failed" );
+    free( vec );
+    return NULL;
+  }
+
+	vec->vt = CVEC;
   vec->size = size;
     
   return vec;
@@ -112,10 +142,15 @@ void fill_m( matrix_t mat, double val ) {
 void print_v( vector_t vec ) {
 	size_t i;
 
-	fprintf( stdout, "%s", "| " ); 
-	for( i=0 ; i < vec->size ; ++i )
-		fprintf( stdout, "%f ", vec->data[ i ] ); 
-	fprintf( stdout, "%s\n", "|" );
+	if( RVEC == vec->vt ) {
+		for( i=0 ; i < vec->size ; ++i )
+			fprintf( stdout, "%f ", vec->data[ i ] ); 
+		fprintf( stdout, "%s", "\n" );
+	}
+	else {
+		for( i=0 ; i < vec->size ; ++i )
+			fprintf( stdout, "%f\n", vec->data[ i ] );
+	}
 
 	return;
 }
@@ -124,14 +159,11 @@ void print_m( matrix_t mat ) {
 	size_t i, j;
 
 	for( i=0 ; i < mat->row ; ++i ) {
-		fprintf( stdout, "%s", "| ");
-
-		for( j=0 ; j < mat->col ; ++j ) {
+		for( j=0 ; j < mat->col ; ++j )
 			fprintf( stdout, "%f ", mat->data[ i ][ j ] );
-		}
-
-		fprintf( stdout, "%s\n", "|" );
+	  fprintf( stdout, "%s", "\n" );
 	}
 
+  fprintf( stdout, "%s", "\n" );
 	return;
 }

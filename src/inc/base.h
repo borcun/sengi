@@ -13,10 +13,15 @@
 
 #define LIBALG_ERR( msg ) fprintf( stderr, "%s\n", msg ) 
 
-/// \brief function that creates a vector
+/// \brief function that creates a row vector
 /// @param len - vector element size
 /// @return if vector is created, return the vector. Otherwise, return NULL.
-vector_t create_v( size_t size );
+vector_t create_rv( size_t size );
+
+/// \brief function that creates a column vector
+/// @param len - vector element size
+/// @return if vector is created, return the vector. Otherwise, return NULL.
+vector_t create_cv( size_t size );
 
 /// \brief funtion that creates a matrix
 /// @param row - matrix row size
@@ -44,7 +49,7 @@ void fill_v( vector_t vec, double val );
 /// @param mat - matrix
 /// @param param - parameter
 /// @return -
-void fill_m( matrix_t mat, double param );
+void fill_m( matrix_t mat, double val );
 
 /// \brief function that prints vector
 /// @param vec - vector
