@@ -1,24 +1,24 @@
 #include "../inc/base.h"
 
-vector_t create_rv( size_t size ) {
+vector_t create_rv( const size_t size ) {
   vector_t vec;
 
   if( 0 > size ) {
-    LIBALG_ERR( "vector size is invalid" );
+    SENGI_ERR( "vector size is invalid" );
     return NULL;
   }
   
   vec = ( vector_t ) malloc( sizeof( struct vector_t ) );
 
   if( NULL == vec ) {
-    LIBALG_ERR( "creating vector is failed" );
+    SENGI_ERR( "creating vector is failed" );
     return NULL;
   }
   
   vec->data = ( double * ) malloc( size * sizeof( double ) );
 
   if( NULL == vec->data ) {
-    LIBALG_ERR( "creating vector is failed" );
+    SENGI_ERR( "creating vector is failed" );
     free( vec );
     return NULL;
   }
@@ -29,25 +29,25 @@ vector_t create_rv( size_t size ) {
   return vec;
 }
 
-vector_t create_cv( size_t size ) {
+vector_t create_cv( const size_t size ) {
   vector_t vec;
 
   if( 0 > size ) {
-    LIBALG_ERR( "vector size is invalid" );
+    SENGI_ERR( "vector size is invalid" );
     return NULL;
   }
   
   vec = ( vector_t ) malloc( sizeof( struct vector_t ) );
 
   if( NULL == vec ) {
-    LIBALG_ERR( "creating vector is failed" );
+    SENGI_ERR( "creating vector is failed" );
     return NULL;
   }
   
   vec->data = ( double * ) malloc( size * sizeof( double ) );
 
   if( NULL == vec->data ) {
-    LIBALG_ERR( "creating vector is failed" );
+    SENGI_ERR( "creating vector is failed" );
     free( vec );
     return NULL;
   }
@@ -58,26 +58,26 @@ vector_t create_cv( size_t size ) {
   return vec;
 }
 
-matrix_t create_m( size_t row, size_t col ) {
+matrix_t create_m( const size_t row, const size_t col ) {
   size_t i, j;
   matrix_t mat;
 
   if( 0 > row || 0 > col ) {
-    LIBALG_ERR( "matrix row or column is invalid" );
+    SENGI_ERR( "matrix row or column is invalid" );
     return NULL;
   }
 
   mat = ( matrix_t ) malloc( sizeof( struct matrix_t ) );
 
   if( NULL == mat ) {
-    LIBALG_ERR( "creating matrix is failed" );
+    SENGI_ERR( "creating matrix is failed" );
     return NULL;
   }
 
   mat->data = ( double ** ) malloc( row * sizeof( double * ) );
 
   if( NULL == mat->data ) {
-    LIBALG_ERR( "creating matrix is failed" );
+    SENGI_ERR( "creating matrix is failed" );
     free( mat );
     return NULL;
   }
@@ -86,10 +86,10 @@ matrix_t create_m( size_t row, size_t col ) {
     mat->data[ i ] = ( double * ) malloc( col * sizeof( double ) );
 
     if( NULL == mat->data[ i ] ) {
-      LIBALG_ERR( "creating matrix is failed" );
+      SENGI_ERR( "creating matrix is failed" );
 
       for( j=0 ; j < i ; ++j )
-	free( mat->data[ j ] );
+				free( mat->data[ j ] );
 
       free( mat );
       return NULL;
@@ -118,7 +118,7 @@ void release_m( matrix_t mat ) {
   return;
 }
 
-void fill_v( vector_t vec, double val ) {
+void fill_v( vector_t vec, const double val ) {
 	size_t i;
 
 	for( i=0 ; i < vec->size ; ++i )
@@ -127,7 +127,7 @@ void fill_v( vector_t vec, double val ) {
 	return;
 }
 
-void fill_m( matrix_t mat, double val ) {
+void fill_m( matrix_t mat, const double val ) {
 	size_t i, j;
 
 	for( i=0 ; i < mat->row ; ++i ) {
@@ -139,7 +139,30 @@ void fill_m( matrix_t mat, double val ) {
 	return;
 }
 
-void print_v( vector_t vec ) {
+void transpose_m( matrix_t mat ) {
+	/*
+	size_t i, j;
+	double **trans = ( double ** ) malloc( sizeof( double * ) * mat->col );
+
+	if( NULL == trans ) {
+		SENGI_ERR( "transpose is failed" );
+		return;
+	}
+
+	for( i=0 ; i < mat->col ; ++i ) {
+		trans[ i ] = ( 
+		for( j=0 ; j < mat->row ; ++j )
+			trans[ j ][ i ] = mat->data[ j ][ i ];
+	}
+	*/
+	return;
+}
+
+void inverse_m( matrix_t mat ) {
+	return;
+}
+
+void print_v( const vector_t vec ) {
 	size_t i;
 
 	if( RVEC == vec->vt ) {
@@ -155,7 +178,7 @@ void print_v( vector_t vec ) {
 	return;
 }
 
-void print_m( matrix_t mat ) {
+void print_m( const matrix_t mat ) {
 	size_t i, j;
 
 	for( i=0 ; i < mat->row ; ++i ) {

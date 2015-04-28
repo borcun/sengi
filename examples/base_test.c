@@ -14,6 +14,11 @@ int main() {
 	print_v( vec2 );
 	printf("\n");
 	print_m( mat );
+	
+	transpose_m( mat );
+
+	printf("\n");
+	print_m( mat );
 
 	release_v( vec1 );
 	release_v( vec2 );
