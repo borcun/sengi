@@ -1,3 +1,4 @@
+
 /**
  * @file base.h
  * @brief libalg basic functions
@@ -51,10 +52,11 @@ void fill_v( vector_t vec, const double val );
 /// @return -
 void fill_m( matrix_t mat, const double val );
 
-/// \brief function that transposes the matrix
-/// @param mat - matrix
+/// \brief function that transposes the source matrix and copies it to destination matrix
+/// @param src - source matrix
+/// @param des - destination matrix
 /// @return -
-void transpose_m( matrix_t mat );
+void transpose_m( matrix_t src, matrix_t des );
 
 /// \brief function that finds inverse of matrix
 /// the inverse method is Gauss-Jordan elimination

@@ -139,22 +139,20 @@ void fill_m( matrix_t mat, const double val ) {
 	return;
 }
 
-void transpose_m( matrix_t mat ) {
-	/*
+void transpose_m( matrix_t src, matrix_t des ) {
 	size_t i, j;
-	double **trans = ( double ** ) malloc( sizeof( double * ) * mat->col );
 
-	if( NULL == trans ) {
-		SENGI_ERR( "transpose is failed" );
+
+	if( src->row != des->col || src->col != des->row ) {
+		SENGI_ERR( "destination matrix is not correct matrix for transpose of source matrix" );
 		return;
 	}
 
-	for( i=0 ; i < mat->col ; ++i ) {
-		trans[ i ] = ( 
-		for( j=0 ; j < mat->row ; ++j )
-			trans[ j ][ i ] = mat->data[ j ][ i ];
+	for( i=0 ; i < src->col ; ++i ) {
+		for( j=0 ; j < src->row ; ++j )
+			des->data[ i ][ j ] = src->data[ j ][ i ];
 	}
-	*/
+
 	return;
 }
 
