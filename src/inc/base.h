@@ -21,6 +21,7 @@ vector_t create_rv( const size_t size );
 
 /// \brief function that creates a column vector
 /// @param len - vector element size
+/// @param data - double data array
 /// @return if vector is created, return the vector. Otherwise, return NULL.
 vector_t create_cv( const size_t size );
 
@@ -43,26 +44,52 @@ void release_m( matrix_t mat );
 /// \brief function that fills vector with value
 /// @param vec - vector
 /// @param val - value
-/// @return -
-void fill_v( vector_t vec, const double val );
-
+/// @return if filling is success, return true. Otherwise, return false.
+bool_t fill_v( vector_t vec, const double val );
+		   
 /// \brief function that fills matrix with value
 /// @param mat - matrix
 /// @param param - parameter
-/// @return -
-void fill_m( matrix_t mat, const double val );
+/// @return if filling is success, return true. Otherwise, return false.
+bool_t fill_m( matrix_t mat, const double val );
 
+/// \brief function that converts data array to vector
+/// @param vec - vector
+/// @param data - data array
+/// @return if the convertion is success, return true. Otherwise, return false.
+bool_t to_v( vector_t vec, const double *data );
+
+/// \brief function that gets row of matrix which is indicated by row index
+/// @param mat - matrix
+/// @param row - matrix row index
+/// @param vec - vector
+/// @return if operation is success, return true. Otherwise, return false.
+bool_t get_row_m( matrix_t mat, size_t row, vector_t vec );
+
+/// \brief function that gets column of matrix which is indicated by col index
+/// @param mat - matrix
+/// @param col - matrix column index
+/// @param vec - vector
+/// @return if operation is success, return true. Otherwise, return false.
+bool_t get_col_m( matrix_t mat, size_t rowcol, vector_t vec );
+		    
 /// \brief function that transposes the source matrix and copies it to destination matrix
 /// @param src - source matrix
 /// @param des - destination matrix
-/// @return -
-void transpose_m( matrix_t src, matrix_t des );
+/// @return if transpose operation is success, return true. Otherwise, return false.
+bool_t transpose_m( matrix_t src, matrix_t des );
 
 /// \brief function that finds inverse of matrix
 /// the inverse method is Gauss-Jordan elimination
 /// @param mat - matrix
-/// @return -
-void inverse_m( matrix_t mat ); 
+/// @return if inverse operation is success, return true. Otherwise, return false.
+bool_t inverse_m( matrix_t src, matrix_t des ); 
+
+/// \brief function that eliminate matrix via Gauss method
+/// @param src - source matrix
+/// @param des - destination matrix
+/// @return if elimination is success, return true. Otherwise, return false.
+bool_t eliminate_m( matrix_t src, matrix_t des );
 
 /// \brief function that prints vector
 /// @param vec - vector
