@@ -167,7 +167,7 @@ bool_t to_v( vector_t vec, const double *data ) {
   return TRUE;
 }
 
-bool_t get_row_m( matrix_t mat, size_t row, vector_t vec ) {
+bool_t get_row_m( const matrix_t mat, const size_t row, vector_t vec ) {
   if( row < 1 || row >= mat->row ) {
     SENGI_ERR( "row value is out of bounds" );
     return FALSE;
@@ -186,7 +186,7 @@ bool_t get_row_m( matrix_t mat, size_t row, vector_t vec ) {
   return to_v( vec, mat->data[ row ] );
 }
 
-bool_t get_col_m( matrix_t mat, size_t col, vector_t vec ) {
+bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec ) {
   size_t i;
   
   if( col < 1 || col >= mat->row ) {
@@ -210,7 +210,7 @@ bool_t get_col_m( matrix_t mat, size_t col, vector_t vec ) {
   return TRUE;
 }
 
-bool_t transpose_m( matrix_t src, matrix_t des ) {
+bool_t transpose_m( const matrix_t src, matrix_t des ) {
   size_t i, j;
 
   if( src->row != des->col || src->col != des->row ) {
@@ -236,11 +236,11 @@ bool_t transpose_m( matrix_t src, matrix_t des ) {
   return TRUE;
 }
 
-bool_t inverse_m( matrix_t src, matrix_t des ) {
+bool_t inverse_m( const matrix_t src, matrix_t des ) {
   return TRUE;
 }
 
-bool_t eliminate_m( matrix_t src, matrix_t des ) {
+bool_t eliminate_m( const matrix_t src, matrix_t des ) {
   double pivot;
   size_t i, j;
   

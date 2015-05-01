@@ -1,4 +1,3 @@
-
 /**
  * @file base.h
  * @brief libalg basic functions
@@ -64,32 +63,32 @@ bool_t to_v( vector_t vec, const double *data );
 /// @param row - matrix row index
 /// @param vec - vector
 /// @return if operation is success, return true. Otherwise, return false.
-bool_t get_row_m( matrix_t mat, size_t row, vector_t vec );
+bool_t get_row_m( const matrix_t mat, const size_t row, vector_t vec );
 
 /// \brief function that gets column of matrix which is indicated by col index
 /// @param mat - matrix
 /// @param col - matrix column index
 /// @param vec - vector
 /// @return if operation is success, return true. Otherwise, return false.
-bool_t get_col_m( matrix_t mat, size_t rowcol, vector_t vec );
+bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec );
 		    
 /// \brief function that transposes the source matrix and copies it to destination matrix
 /// @param src - source matrix
 /// @param des - destination matrix
 /// @return if transpose operation is success, return true. Otherwise, return false.
-bool_t transpose_m( matrix_t src, matrix_t des );
+bool_t transpose_m( const matrix_t src, matrix_t des );
 
 /// \brief function that finds inverse of matrix
 /// the inverse method is Gauss-Jordan elimination
 /// @param mat - matrix
 /// @return if inverse operation is success, return true. Otherwise, return false.
-bool_t inverse_m( matrix_t src, matrix_t des ); 
+bool_t inverse_m( const matrix_t src, matrix_t des ); 
 
 /// \brief function that eliminate matrix via Gauss method
 /// @param src - source matrix
 /// @param des - destination matrix
 /// @return if elimination is success, return true. Otherwise, return false.
-bool_t eliminate_m( matrix_t src, matrix_t des );
+bool_t eliminate_m( const matrix_t src, matrix_t des );
 
 /// \brief function that prints vector
 /// @param vec - vector
