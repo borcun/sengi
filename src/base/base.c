@@ -152,7 +152,7 @@ bool_t fill_m( matrix_t mat, const double val ) {
   return FALSE;
 }
 
-void copy_v( vector_t src, vector_t des ) {
+void copy_v( const vector_t src, vector_t des ) {
   size_t i;
   
   if( is_valid_v( src ) && is_valid_v( des ) ) {
@@ -165,7 +165,7 @@ void copy_v( vector_t src, vector_t des ) {
   return;
 }
 
-void copy_m( matrix_t src, matrix_t des ) {
+void copy_m( const matrix_t src, matrix_t des ) {
   size_t i, j;
 
   if( is_valid_m( src ) && is_valid_m( des ) ) {
@@ -224,7 +224,7 @@ bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec ) {
   return FALSE;
 }
 
-void add_mm( matrix_t mat1, matrix_t mat2, matrix_t res ) {
+void add_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
   size_t i, j;
   
   if( is_valid_m( mat1 ) && is_valid_m( mat2 ) && is_valid_m( res ) ) {
@@ -244,7 +244,7 @@ void add_mm( matrix_t mat1, matrix_t mat2, matrix_t res ) {
   return;
 }
 
-void sub_mm( matrix_t mat1, matrix_t mat2, matrix_t res ) {
+void sub_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
   size_t i, j;
   
   if( is_valid_m( mat1 ) && is_valid_m( mat2 ) && is_valid_m( res ) ) {
@@ -264,7 +264,7 @@ void sub_mm( matrix_t mat1, matrix_t mat2, matrix_t res ) {
   return;
 }
 
-void mult_mm( matrix_t mat1, matrix_t mat2, matrix_t res ) {
+void mult_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
   size_t i, j, k;
   double temp = 0.0;
   
@@ -290,7 +290,7 @@ void mult_mm( matrix_t mat1, matrix_t mat2, matrix_t res ) {
   return;
 }
 
-void add_vv( vector_t vec1, vector_t vec2, vector_t res ) {
+void add_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
   size_t i;
   
   if( is_valid_v( vec1 ) && is_valid_v( vec2 ) && is_valid_v( res ) ) {
@@ -303,7 +303,7 @@ void add_vv( vector_t vec1, vector_t vec2, vector_t res ) {
   return;
 }
 
-void sub_vv( vector_t vec1, vector_t vec2, vector_t res ) {
+void sub_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
   size_t i;
   
   if( is_valid_v( vec1 ) && is_valid_v( vec2 ) && is_valid_v( res ) ) {
@@ -316,7 +316,7 @@ void sub_vv( vector_t vec1, vector_t vec2, vector_t res ) {
   return;
 }
 
-void dot_product_vv( vector_t vec1, vector_t vec2, double *res ) {
+void dot_product_vv( const vector_t vec1, const vector_t vec2, double *res ) {
   size_t i;
   
   if( is_valid_v( vec1 ) && is_valid_v( vec2 ) ) {
@@ -342,7 +342,7 @@ void dot_product_vv( vector_t vec1, vector_t vec2, double *res ) {
   return;
 }
 
-void cross_product_vv( vector_t vec1, vector_t vec2, vector_t res ) {
+void cross_product_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
   return;
 }
 
@@ -461,7 +461,7 @@ void print_m( const matrix_t mat ) {
   return;
 }
 
-bool_t is_valid_v( vector_t vec ) {
+bool_t is_valid_v( const vector_t vec ) {
   if( NULL == vec ) {
     SENGI_ERR( "the vector is null" );
     return FALSE;
@@ -485,7 +485,7 @@ bool_t is_valid_v( vector_t vec ) {
 /// \brief function that checks whether the matrix is valid
 /// @param mat - matrix
 /// @return if the matrix is valid, return true. Otherwise, return false. 
-bool_t is_valid_m( matrix_t mat ) {
+bool_t is_valid_m( const matrix_t mat ) {
   if( NULL == mat ) {
     SENGI_ERR( "the matrix is null" );
     return FALSE;

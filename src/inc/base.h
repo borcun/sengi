@@ -56,13 +56,13 @@ bool_t fill_m( matrix_t mat, const double val );
 /// @param src - source vector
 /// @param des - destination vector
 /// @return -
-void copy_v( vector_t src, vector_t des );
+void copy_v( const vector_t src, vector_t des );
 
 /// \brief function that copies source matrix to destination matrix
 /// @param src - source matrix
 /// @param des - destination matrix
 /// @return -
-void copy_m( matrix_t src, matrix_t des );
+void copy_m( const matrix_t src, matrix_t des );
 
 /// \brief function that converts data array to vector
 /// @param vec - vector
@@ -89,49 +89,49 @@ bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec );
 /// @param mat2 - second matrix
 /// @param res - result matrix
 /// @return -
-void add_mm( matrix_t mat1, matrix_t mat2, matrix_t res );
+void add_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res );
 
 /// \brief function that subtracts two matrices
 /// @param mat1 - first matrix
 /// @param mat2 - second matrix
 /// @param res - result matrix
 /// @return -
-void sub_mm( matrix_t mat1, matrix_t mat2, matrix_t res );
+void sub_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res );
 
 /// \brief function that multiplies two matrices
 /// @param mat1 - first matrix
 /// @param mat2 - second matrix
 /// @param res - result matrix
 /// @return -
-void mult_mm( matrix_t mat1, matrix_t mat2, matrix_t res );
+void mult_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res );
 
 /// \brief function that adds two vectors
 /// @param vec1 - first vector
 /// @param vec2 - second vector
 /// @param res - result vector
 /// @return -
-void add_vv( vector_t vec1, vector_t vec2, vector_t res );
+void add_vv( const vector_t vec1, const vector_t vec2, vector_t res );
 
 /// \brief function that subtracts two vectors
 /// @param vec1 - first vector
 /// @param vec2 - second vector
 /// @param res - result vector
 /// @return -
-void sub_vv( vector_t vec1, vector_t vec2, vector_t res );
+void sub_vv( const vector_t vec1, const vector_t vec2, vector_t res );
 
 /// \brief function that performs dot product of two vectors
 /// @param vec1 - first vector
 /// @param vec2 - second vector
 /// @param res - result
 /// @return -
-void dot_product_vv( vector_t vec1, vector_t vec2, double *res );
+void dot_product_vv( const vector_t vec1, const vector_t vec2, double *res );
 
 /// \brief function that performs cross product of two vectors
 /// @param vec1 - first vector
 /// @param vec2 - second vector
 /// @param res - result vector
 /// @return -
-void cross_product_vv( vector_t vec1, vector_t vec2, vector_t res );
+void cross_product_vv( const vector_t vec1, const vector_t vec2, vector_t res );
 
 /// \brief function that transposes the source matrix and copies it to destination matrix
 /// @param src - source matrix
@@ -176,11 +176,11 @@ void print_m( const matrix_t m );
 /// \brief function that checks whether the vector is valid
 /// @param vec - vector
 /// @return if the vector is valid, return true. Otherwise, return false. 
-bool_t is_valid_v( vector_t vec );
+bool_t is_valid_v( const vector_t vec );
 
 /// \brief function that checks whether the matrix is valid
 /// @param mat - matrix
 /// @return if the matrix is valid, return true. Otherwise, return false. 
-bool_t is_valid_m( matrix_t mat );
+bool_t is_valid_m( const matrix_t mat );
 
 #endif
