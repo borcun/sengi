@@ -71,7 +71,56 @@ bool_t get_row_m( const matrix_t mat, const size_t row, vector_t vec );
 /// @param vec - vector
 /// @return if operation is success, return true. Otherwise, return false.
 bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec );
-		    
+
+/// \brief function that adds two matrices
+/// @param mat1 - first matrix
+/// @param mat2 - second matrix
+/// @param res - result matrix
+/// @return -
+void add_mm( matrix_t mat1, matrix_t mat2, matrix_t res );
+
+/// \brief function that subtracts two matrices
+/// @param mat1 - first matrix
+/// @param mat2 - second matrix
+/// @param res - result matrix
+/// @return -
+void sub_mm( matrix_t mat1, matrix_t mat2, matrix_t res );
+
+/// \brief function that multiplies two matrices
+/// @param mat1 - first matrix
+/// @param mat2 - second matrix
+/// @param res - result matrix
+/// @return -
+void mult_mm( matrix_t mat1, matrix_t mat2, matrix_t res );
+
+/// \brief function that adds two vectors
+/// @param vec1 - first vector
+/// @param vec2 - second vector
+/// @param res - result vector
+/// @return -
+void add_vv( vector_t vec1, vector_t vec2, vector_t res );
+
+/// \brief function that subtracts two vectors
+/// @param vec1 - first vector
+/// @param vec2 - second vector
+/// @param res - result vector
+/// @return -
+void sub_vv( vector_t vec1, vector_t vec2, vector_t res );
+
+/// \brief function that performs dot product of two vectors
+/// @param vec1 - first vector
+/// @param vec2 - second vector
+/// @param res - result
+/// @return -
+void dot_product_vv( vector_t vec1, vector_t vec2, double *res );
+
+/// \brief function that performs cross product of two vectors
+/// @param vec1 - first vector
+/// @param vec2 - second vector
+/// @param res - result vector
+/// @return -
+void cross_product_vv( vector_t vec1, vector_t vec2, vector_t res );
+
 /// \brief function that transposes the source matrix and copies it to destination matrix
 /// @param src - source matrix
 /// @param des - destination matrix
@@ -90,6 +139,18 @@ bool_t inverse_m( const matrix_t src, matrix_t des );
 /// @return if elimination is success, return true. Otherwise, return false.
 bool_t eliminate_m( const matrix_t src, matrix_t des );
 
+/// \brief function that scales vector with a number
+/// @param vec - vector
+/// @param num - number
+/// @return -
+void scale_v( vector_t vec, const double num ); 
+
+/// \brief function that scales matrix with a number
+/// @param mat - matrix
+/// @param num - number
+/// @return -
+void scale_m( matrix_t matrix, const double num );
+
 /// \brief function that prints vector
 /// @param vec - vector
 /// @return -
@@ -99,5 +160,15 @@ void print_v( const vector_t vec );
 /// @param mat - matrix
 /// @return -
 void print_m( const matrix_t m );
+
+/// \brief function that checks whether the vector is valid
+/// @param vec - vector
+/// @return if the vector is valid, return true. Otherwise, return false. 
+bool_t is_valid_v( vector_t vec );
+
+/// \brief function that checks whether the matrix is valid
+/// @param mat - matrix
+/// @return if the matrix is valid, return true. Otherwise, return false. 
+bool_t is_valid_m( matrix_t mat );
 
 #endif

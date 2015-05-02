@@ -20,14 +20,14 @@ typedef enum {
 
 //! row or column vector enumeration
 typedef enum {
-	RVEC, /**< row vector */
-	CVEC  /**< column vector */
+  RVEC, /**< row vector */
+  CVEC  /**< column vector */
 } vt_t;
 
 //! vector data structure
 struct vector_t {
   size_t size;  /**< vector element size */
-	vt_t vt;      /**< vector type such as row or column */
+  vt_t type;    /**< vector type such as row or column */
   double *data; /**< vector data array */
 };
 
