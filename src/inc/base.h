@@ -1,7 +1,7 @@
 /**
  * @file base.h
  * @brief libalg basic functions
- * @data April 23, 2015
+ * @date April 23, 2015
  * @author boo
  * @copyright free software
  */
