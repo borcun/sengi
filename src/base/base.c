@@ -152,7 +152,7 @@ bool_t fill_m( matrix_t mat, const double val ) {
   return FALSE;
 }
 
-void copy_vv( vector_t src, vector_t des ) {
+void copy_v( vector_t src, vector_t des ) {
   size_t i;
   
   if( is_valid_v( src ) && is_valid_v( des ) ) {
@@ -165,7 +165,7 @@ void copy_vv( vector_t src, vector_t des ) {
   return;
 }
 
-void copy_mm( matrix_t src, matrix_t des ) {
+void copy_m( matrix_t src, matrix_t des ) {
   size_t i, j;
 
   if( is_valid_m( src ) && is_valid_m( des ) ) {
