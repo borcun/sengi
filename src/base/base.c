@@ -152,6 +152,34 @@ bool_t fill_m( matrix_t mat, const double val ) {
   return FALSE;
 }
 
+void copy_vv( vector_t src, vector_t des ) {
+  size_t i;
+  
+  if( is_valid_v( src ) && is_valid_v( des ) ) {
+    if( src->size == des->size ) {
+      for( i=0 ; i < src->size ; ++i )
+	src->data[ i ] = des->data[ i ];
+    }
+  }
+
+  return;
+}
+
+void copy_mm( matrix_t src, matrix_t des ) {
+  size_t i, j;
+
+  if( is_valid_m( src ) && is_valid_m( des ) ) {
+    if( src->row == des->row && src->col == des->col ) {
+      for( i=0 ; i < src->row ; ++i ) {
+	for( j=0 ; j < src->col ; ++j )
+	  des->data[ i ][ j ] = src->data[ i ][ j ];
+      }
+    }
+  }
+
+  return;
+}
+
 bool_t to_v( vector_t vec, const double *data ) {
   size_t i;
   
@@ -433,10 +461,6 @@ void print_m( const matrix_t mat ) {
   return;
 }
 
- 
-/// \brief function that checks whether the vector is valid
-/// @param vec - vector
-/// @return if the vector is valid, return true. Otherwise, return false. 
 bool_t is_valid_v( vector_t vec ) {
   if( NULL == vec ) {
     SENGI_ERR( "the vector is null" );

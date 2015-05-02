@@ -52,6 +52,18 @@ bool_t fill_v( vector_t vec, const double val );
 /// @return if filling is success, return true. Otherwise, return false.
 bool_t fill_m( matrix_t mat, const double val );
 
+/// \brief function that copies source vector to destination vector
+/// @param src - source vector
+/// @param des - destination vector
+/// @return -
+void copy_vv( vector_t src, vector_t des );
+
+/// \brief function that copies source matrix to destination matrix
+/// @param src - source matrix
+/// @param des - destination matrix
+/// @return -
+void copy_mm( matrix_t src, matrix_t des );
+
 /// \brief function that converts data array to vector
 /// @param vec - vector
 /// @param data - data array
