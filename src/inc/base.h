@@ -7,6 +7,7 @@
  */
 
 #include "types.h"
+#include < math.h >
 
 #ifndef BASE_H
 #define BASE_H
@@ -63,6 +64,16 @@ void copy_v( const vector_t src, vector_t des );
 /// @param des - destination matrix
 /// @return -
 void copy_m( const matrix_t src, matrix_t des );
+
+/// \brief function that finds norm of vector
+/// @param vec - vector
+/// @return if the vector is valid, return norm of vector. Otherwise, return -1.
+size_t norm_v( vector_t vec );
+
+/// \brief function that finds norm of matrix
+/// @param vec - matrix
+/// @return if the matrix is valid, return norm of matrix. Otherwise, return -1.
+size_t norm_m( matrix_t mat );
 
 /// \brief function that converts data array to vector
 /// @param vec - vector

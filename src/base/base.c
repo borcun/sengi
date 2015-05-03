@@ -180,6 +180,38 @@ void copy_m( const matrix_t src, matrix_t des ) {
   return;
 }
 
+// function that finds norm of vector
+size_t norm_v( vector_t vec ) {
+  double total = 0.0;
+  size_t i;
+  
+  if( is_valid_v( vec ) ) {
+    for( i=0 ; i < vec->size ; ++i )
+      total += pow( vec->data[ i ], 2 );
+
+    return sqrt( total );
+  }
+
+  return -1;
+}
+
+// function that finds norm of matrix
+size_t norm_m( matrix_t mat ) {
+  double total = 0.0;
+  size_t i, j;
+
+  if( is_valid_m( mat ) ) {
+    for( i=0 ; i < mat->row ; ++i ) {
+      for( j=0 ; j < mat->col ; ++j )
+	total += pow( mat->data[ i ][ j ], 2 );
+    }
+
+    return sqrt( total );
+  }
+
+  return -1;
+}
+
 bool_t to_v( vector_t vec, const double *data ) {
   size_t i;
   
