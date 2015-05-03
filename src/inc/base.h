@@ -6,8 +6,8 @@
  * @copyright free software
  */
 
+#include <math.h>
 #include "types.h"
-#include < math.h >
 
 #ifndef BASE_H
 #define BASE_H
@@ -115,6 +115,20 @@ void sub_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res );
 /// @param res - result matrix
 /// @return -
 void mult_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res );
+
+/// \brief function that multiplies matrix and vector
+/// @param mat - matrix
+/// @param vec - vector
+/// @param res - result vector
+/// @return -
+void mult_mv( const matrix_t mat, const vector_t vec, vector_t res );
+
+/// \brief function that multiplies vector and matrix
+/// @param vec - vector
+/// @param mat - matrix
+/// @param res - result matrix
+/// @return -
+void mult_vm( const vector_t vec, const matrix_t mat, vector_t res );
 
 /// \brief function that adds two vectors
 /// @param vec1 - first vector

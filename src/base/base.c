@@ -322,6 +322,60 @@ void mult_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
   return;
 }
 
+void mult_mv( const matrix_t mat, const vector_t vec, vector_t res ) {
+  size_t i, j;
+  double total = 0.0;
+  
+  if( is_valid_m( mat ) && is_valid_v( vec ) && is_valid_v( res ) ) {
+    if( mat->col != vec->size )
+      SENGI_ERR( "the matrix column and the vector size does not match" );
+    else if( mat->row != res->size )
+      SENGI_ERR( "the matrix row and the result vector size does not match" );
+    else if( vec->type != CVEC || res->type != CVEC )
+      SENGI_ERR( "the vector and result vector must be column vectors" );
+    else {
+      for( i=0 ; i < mat->row ; ++i ) {
+	for( j=0 ; j < mat->col ; ++j )
+	  total += mat->data[ i ][ j ] * vec->data[ j ];
+
+	res->data[ i ] = total;
+	total = 0.0;
+      }
+    }
+  }
+  else
+    SENGI_ERR( "the matrix or the vectors is invalid" );
+
+  return;
+}
+
+void mult_vm( const vector_t vec, const matrix_t mat, vector_t res ) {
+  size_t i, j;
+  double total = 0.0;
+  
+  if( is_valid_m( mat ) && is_valid_v( vec ) && is_valid_v( res ) ) {
+    if( mat->row != vec->size )
+      SENGI_ERR( "the matrix row and vector size does not match" );
+    else if( mat->col != res->size )
+      SENGI_ERR( "the matrix column and the result vector size does not match" );
+    else if( vec->type != RVEC || res->type != RVEC )
+      SENGI_ERR( "the vector and result vector must be row vectors" );
+    else {
+      for( i=0 ; i < mat->col ; ++i ) {
+	for( j=0 ; j < mat->row ; ++j )
+	  total += vec->data[ j ] * mat->data[ j ][ i ];
+
+	res->data[ i ] = total;
+	total = 0.0;
+      }
+    }
+  }
+  else
+    SENGI_ERR( "the matrix or the vectors is invalid" );
+
+  return;
+}
+
 void add_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
   size_t i;
   
