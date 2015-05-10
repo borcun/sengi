@@ -28,5 +28,5 @@
 #define MATCH_SIZE     "the vector sizes do not match"
 #define MATCH_ROW_SIZE "the matrix row and the vector size do not match" 
 #define MATCH_COL_SIZE "the matrix column and the vector size do not match" 
-
+#define CROSS_PRODUCT  "the vector sizes have to be 3D"
 #endif

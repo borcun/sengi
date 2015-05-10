@@ -1,4 +1,4 @@
-#include "../inc/base.h"
+#include "base.h"
 
 // function that create a row vector
 vector_t create_rv( const size_t size ) {
@@ -273,7 +273,7 @@ size_t norm_m( const matrix_t mat ) {
 
 // function that finds diagonal vector of the matrix
 bool_t diagonal_m( matrix_t mat, vector_t vec ) {
-  size_t i, j;
+  size_t i;
   
   if( !is_valid_m( mat ) ) {
     SENGI_ERR( "the matrix is invalid" );
@@ -307,7 +307,7 @@ void extend_mv( matrix_t mat, const vector_t vec ) {
 
   if( !is_valid_m( mat ) )
     SENGI_ERR( INVALID_MAT );
-  else if( !is_invalid_v( vec ) )
+  else if( !is_valid_v( vec ) )
     SENGI_ERR( INVALID_VEC );
   else {
     switch( vec->type ) {
@@ -701,6 +701,16 @@ void dot_product_vv( const vector_t vec1, const vector_t vec2, double *res ) {
 
 // function that finds cross product of the vectors
 void cross_product_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
+  if( !is_valid_v( vec1 ) || !is_valid_v( vec2 ) || !is_valid_v( res ) )
+    SENGI_ERR( INVALID_VEC );
+  else if( vec1->size != 3 || vec2->size != 3 || res->size != 3 )
+    SENGI_ERR( CROSS_PRODUCT );
+  else {
+    res->data[ 0 ] = vec1->data[ 1 ] * vec2->data[ 2 ] - vec1->data[ 2 ] * vec2->data[ 1 ];
+    res->data[ 1 ] = vec1->data[ 2 ] * vec2->data[ 0 ] - vec1->data[ 0 ] * vec2->data[ 2 ];
+    res->data[ 2 ] = vec1->data[ 0 ] * vec2->data[ 1 ] - vec1->data[ 1 ] * vec2->data[ 0 ];    
+  }
+      
   return;
 }
 
