@@ -180,8 +180,7 @@ void copy_m( const matrix_t src, matrix_t des ) {
   return;
 }
 
-// function that finds norm of vector
-size_t norm_v( vector_t vec ) {
+size_t norm_v( const vector_t vec ) {
   double total = 0.0;
   size_t i;
   
@@ -195,8 +194,7 @@ size_t norm_v( vector_t vec ) {
   return -1;
 }
 
-// function that finds norm of matrix
-size_t norm_m( matrix_t mat ) {
+size_t norm_m( const matrix_t mat ) {
   double total = 0.0;
   size_t i, j;
 
@@ -212,17 +210,148 @@ size_t norm_m( matrix_t mat ) {
   return -1;
 }
 
-bool_t to_v( vector_t vec, const double *data ) {
+void extend_mv( matrix_t mat, const vector_t vec ) {
+  size_t i, j;
+  size_t row, col;
+  double **data;
+
+  if( is_valid_m( mat ) && is_valid_v( vec ) ) {  
+    switch( vec->type ) {
+    case RVEC:
+      if( mat->col != vec->size )
+	SENGI_ERR( "the matrix column and the vector size does not match" );
+      else {
+	data = ( double ** ) malloc( sizeof( double * ) * ( mat->row + 1 ) );
+
+	if( NULL == data ) {
+	  SENGI_ERR( "a memory allocation error occurs" );
+	  return;
+	}
+
+	for( i=0 ; i < mat->row ; ++i ) {
+	  data[ i ] = ( double * ) malloc( sizeof( double ) * mat->col );
+
+	  if( NULL == data[ i ] ) {
+	    SENGI_ERR( "" );
+
+	    for( j=0 ; j < i ; ++j )
+	      free( data[ j ] );
+	    free( data );
+
+	    return;
+	  }
+	
+	  memcpy( data[ i ], mat->data[ i ], mat->col );
+	}
+
+	memcpy( data[ mat->row ], vec->data, vec->size );
+	row = mat->row + 1;
+	col = mat->col;
+	
+	release_m( mat );
+	mat = create_m( row, col );
+	to_m( mat, data );
+
+	for( i=0 ; i < row ; ++i )
+	  free( data[ i ] );
+	free( data );
+      } // end of else
+      break;
+    case CVEC:
+      if( mat->row != vec->size )
+	SENGI_ERR( "the matrix row and the vector size does not match" );
+      else {
+	data = ( double ** ) malloc( sizeof( double * ) * mat->row );
+
+	if( NULL == data ) {
+	  SENGI_ERR( "a memory allocation error occurs" );
+	  return;
+	}
+
+	for( i=0 ; i < mat->row ; ++i ) {
+	  data[ i ] = ( double * ) malloc( sizeof( double ) * ( mat->col + 1 ) );
+
+	  if( NULL == data[ i ] ) {
+	    SENGI_ERR( "" );
+
+	    for( j=0 ; j < i ; ++j )
+	      free( data[ j ] );
+	    free( data );
+
+	    return;
+	  }
+
+	  // copy whole row data to row of new data array
+	  memcpy( data[ i ], mat->data[ i ], mat->col );
+	  // add the data of column vector to end of row
+	  data[ i ][ mat->col ] = vec->data[ i ];
+	}
+
+	row = mat->row;
+	col = mat->col + 1;
+	
+	release_m( mat );
+	mat = create_m( row, col );
+	to_m( mat, data );
+
+	for( i=0 ; i < row ; ++i )
+	  free( data[ i ] );
+	free( data );
+      } // end of else
+      break;
+    default:
+      SENGI_ERR( "the vector type is invalid" );
+      break;
+    }
+  }
+  else
+    SENGI_ERR( "the matrix or the vector is invalid" );
+  
+  return;
+}
+
+void extend_mm( matrix_t aug, const matrix_t mat ) {
+  return;
+}
+
+bool_t to_v( vector_t vec, double *data ) {
   size_t i;
   
-  if( is_valid_v( vec ) ) {
+  if( !is_valid_v( vec ) ) {
+    SENGI_ERR( "the vector is invalid" );
+    return FALSE;
+  }
+  else if( NULL == data ) {
+    SENGI_ERR( "the data is invalid" );
+    return FALSE;
+  }
+  else {
     for( i=0 ; i < vec->size ; ++i )
       vec->data[ i ] = data[ i ];
 
     return TRUE;
   }
+}
 
-  return FALSE;
+bool_t to_m( matrix_t mat, double **data ) {
+  size_t i, j;
+  
+  if( !is_valid_m( mat ) ) {
+    SENGI_ERR( "the matrix is invalid" );
+    return FALSE;
+  }
+  else if( NULL == data ) {
+    SENGI_ERR( "the data is invalid" );
+    return FALSE;
+  }
+  else {
+    for( i=0 ; i < mat->row ; ++i ) {
+      for( j=0 ; j < mat->col ; ++j )
+	mat->data[ i ][ j ] = data[ i ][ j ];
+    }
+    
+    return TRUE;
+  }
 }
 
 bool_t get_row_m( const matrix_t mat, const size_t row, vector_t vec ) {
@@ -463,9 +592,9 @@ bool_t inverse_m( const matrix_t src, matrix_t des ) {
 }
 
 bool_t eliminate_m( const matrix_t src, matrix_t des ) {
-  double pivot;
+  /*  double pivot;
   size_t i, j;
-  
+  */
   if( src->row != des->col || src->col != des->row ) {
     SENGI_ERR( "destination matrix does not match transpose of source matrix" );
     return FALSE;
@@ -568,9 +697,6 @@ bool_t is_valid_v( const vector_t vec ) {
     return TRUE;
 }
 
-/// \brief function that checks whether the matrix is valid
-/// @param mat - matrix
-/// @return if the matrix is valid, return true. Otherwise, return false. 
 bool_t is_valid_m( const matrix_t mat ) {
   if( NULL == mat ) {
     SENGI_ERR( "the matrix is null" );

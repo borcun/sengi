@@ -1,18 +1,19 @@
 /**
  * @file base.h
- * @brief libalg basic functions
+ * @brief sengi library basic functions
  * @date April 23, 2015
  * @author boo
  * @copyright free software
  */
 
 #include <math.h>
+#include <string.h>
 #include "types.h"
 
 #ifndef BASE_H
 #define BASE_H
 
-#define SENGI_ERR( msg ) fprintf( stderr, "%s\n", msg ) 
+#define SENGI_ERR( msg ) fprintf( stderr, "%s\n", msg )
 
 /// \brief function that creates a row vector
 /// @param len - vector element size
@@ -30,6 +31,12 @@ vector_t create_cv( const size_t size );
 /// @param col - matrix column size
 /// @return if matrix is created, return the matrix. Otherwise, return NULL.
 matrix_t create_m( const size_t row, const size_t col );
+
+/// \brief function that creates identity matrix
+/// @param row - matrix row size
+/// @param col - matrix column size
+/// @return if matrix is created, return the matrix. Otherwise, return NULL.
+matrix_t create_im( const size_t row, const size_t col );
 
 /// \brief function that releases vector
 /// @param vec - vector
@@ -68,18 +75,36 @@ void copy_m( const matrix_t src, matrix_t des );
 /// \brief function that finds norm of vector
 /// @param vec - vector
 /// @return if the vector is valid, return norm of vector. Otherwise, return -1.
-size_t norm_v( vector_t vec );
+size_t norm_v( const vector_t vec );
 
 /// \brief function that finds norm of matrix
-/// @param vec - matrix
+/// @param mat - matrix
 /// @return if the matrix is valid, return norm of matrix. Otherwise, return -1.
-size_t norm_m( matrix_t mat );
+size_t norm_m( const matrix_t mat );
+
+/// \brief function that extends matrix with the vector according to vector type
+/// @param mat - matrix
+/// @param vec - vector
+/// @return -
+void extend_mv( matrix_t mat, const vector_t vec );
+
+/// \brief function that extends matrix with the matrix
+/// @param aug - augmented matrix
+/// @param mat - matrix
+/// @return -
+void extend_mm( matrix_t aug, const matrix_t mat );
 
 /// \brief function that converts data array to vector
 /// @param vec - vector
 /// @param data - data array
 /// @return if the convertion is success, return true. Otherwise, return false.
-bool_t to_v( vector_t vec, const double *data );
+bool_t to_v( vector_t vec, double *data );
+
+/// \brief function that converts data array to matrix
+/// @param mat - matrix
+/// @param data - data array
+/// @return if the convertion is success, return true. Otherwise, return false.
+bool_t to_m( matrix_t mat, double **data );
 
 /// \brief function that gets row of matrix which is indicated by row index
 /// @param mat - matrix
