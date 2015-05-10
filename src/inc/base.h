@@ -213,32 +213,32 @@ void cross_product_vv( const vector_t vec1, const vector_t vec2, vector_t res );
 /// \brief function that transposes the source matrix and copies it to destination matrix
 /// @param src - source matrix
 /// @param des - destination matrix
-/// @return if transpose operation is success, return true. Otherwise, return false.
-bool_t transpose_m( const matrix_t src, matrix_t des );
+/// @return -
+void transpose_m( const matrix_t src, matrix_t des );
 
 /// \brief function that finds inverse of matrix
 /// the inverse method is Gauss-Jordan elimination
 /// @param mat - matrix
-/// @return if inverse operation is success, return true. Otherwise, return false.
-bool_t inverse_m( const matrix_t src, matrix_t des ); 
+/// @return -
+void inverse_m( const matrix_t src, matrix_t des ); 
 
 /// \brief function that eliminate matrix via Gauss method
 /// @param src - source matrix
 /// @param des - destination matrix
-/// @return if elimination is success, return true. Otherwise, return false.
-bool_t eliminate_m( const matrix_t src, matrix_t des );
+/// @return -
+void eliminate_m( const matrix_t src, matrix_t des );
 
 /// \brief function that scales vector with a number
 /// @param vec - vector
-/// @param num - number
+/// @param val - value
 /// @return -
-void scale_v( vector_t vec, const double num ); 
+void scale_v( vector_t vec, const double val ); 
 
 /// \brief function that scales matrix with a number
 /// @param mat - matrix
-/// @param num - number
+/// @param val - value
 /// @return -
-void scale_m( matrix_t matrix, const double num );
+void scale_m( matrix_t matrix, const double val );
 
 /// \brief function that prints vector
 /// @param vec - vector
