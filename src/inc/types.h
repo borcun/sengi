@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define DEFAULT_VAL 0.0
+
 //! boolean enumeration
 typedef enum {
   FALSE, /**< false type */

@@ -1,24 +1,25 @@
 #include "../inc/base.h"
 
+// function that create a row vector
 vector_t create_rv( const size_t size ) {
   vector_t vec;
   
   if( 0 > size ) {
-    SENGI_ERR( "vector size is invalid" );
+    SENGI_ERR( INVALID_SIZE );
     return NULL;
   }
   
   vec = ( vector_t ) malloc( sizeof( struct vector_t ) );
 
   if( NULL == vec ) {
-    SENGI_ERR( "creating vector is failed" );
+    SENGI_ERR( FAILED_VEC );
     return NULL;
   }
   
-  vec->data = ( double * ) malloc( size * sizeof( double ) );
+  vec->data = ( double * ) calloc( DEFAULT_VAL, size * sizeof( double ) );
 
   if( NULL == vec->data ) {
-    SENGI_ERR( "creating vector is failed" );
+    SENGI_ERR( FAILED_VEC );
     free( vec );
     return NULL;
   }
@@ -29,25 +30,26 @@ vector_t create_rv( const size_t size ) {
   return vec;
 }
 
+// function that creates a column vector
 vector_t create_cv( const size_t size ) {
   vector_t vec;
   
   if( 0 > size ) {
-    SENGI_ERR( "vector size is invalid" );
+    SENGI_ERR( INVALID_SIZE );
     return NULL;
   }
   
   vec = ( vector_t ) malloc( sizeof( struct vector_t ) );
 
   if( NULL == vec ) {
-    SENGI_ERR( "creating vector is failed" );
+    SENGI_ERR( FAILED_VEC );
     return NULL;
   }
   
-  vec->data = ( double * ) malloc( size * sizeof( double ) );
+  vec->data = ( double * ) calloc( DEFAULT_VAL, size * sizeof( double ) );
 
   if( NULL == vec->data ) {
-    SENGI_ERR( "creating vector is failed" );
+    SENGI_ERR( FAILED_VEC );
     free( vec );
     return NULL;
   }
@@ -58,35 +60,41 @@ vector_t create_cv( const size_t size ) {
   return vec;
 }
 
+// function that creates a matrix
 matrix_t create_m( const size_t row, const size_t col ) {
   size_t i, j;
   matrix_t mat;
 
-  if( 0 > row || 0 > col ) {
-    SENGI_ERR( "matrix row or column is invalid" );
+  if( row < 0 ) {
+    SENGI_ERR( INVALID_ROW );
+    return NULL;
+  }
+
+  if( col < 0 ) {
+    SENGI_ERR( INVALID_COL );
     return NULL;
   }
 
   mat = ( matrix_t ) malloc( sizeof( struct matrix_t ) );
 
   if( NULL == mat ) {
-    SENGI_ERR( "creating matrix is failed" );
+    SENGI_ERR( FAILED_MAT );
     return NULL;
   }
 
   mat->data = ( double ** ) malloc( row * sizeof( double * ) );
 
   if( NULL == mat->data ) {
-    SENGI_ERR( "creating matrix is failed" );
+    SENGI_ERR( FAILED_MAT );
     free( mat );
     return NULL;
   }
 
   for( i=0 ; i < row ; ++i ) {
-    mat->data[ i ] = ( double * ) malloc( col * sizeof( double ) );
+    mat->data[ i ] = ( double * ) calloc( DEFAULT_VAL, col * sizeof( double ) );
 
     if( NULL == mat->data[ i ] ) {
-      SENGI_ERR( "creating matrix is failed" );
+      SENGI_ERR( FAILED_MAT );
 
       for( j=0 ; j < i ; ++j )
 	free( mat->data[ j ] );
@@ -102,54 +110,87 @@ matrix_t create_m( const size_t row, const size_t col ) {
   return mat;
 }
 
+// function that releases the vector
 void release_v( vector_t vec ) {
   if( is_valid_v( vec ) ) {
     free( vec->data );
     free( vec );
   }
+  else
+    SENGI_ERR( INVALID_VEC );
   
   return;
 }
 
+// function that releases the matrix
 void release_m( matrix_t mat ) {
   size_t i;
 
   if( is_valid_m( mat ) ) {
     for( i=0 ; i < mat->row ; ++i )
       free( mat->data[ i ] );
-
     free( mat );
   }
-
+  else
+    SENGI_ERR( INVALID_MAT );
+  
   return;
 }
 
-bool_t fill_v( vector_t vec, const double val ) {
+// function that puts the value into the vector
+void put_v( vector_t vec, const size_t index, const double val ) {
+  if( !is_valid_v( vec ) )
+    SENGI_ERR( INVALID_VEC );
+  else if( index < 0 || index >= vec->size )
+    SENGI_ERR( INVALID_INDEX );
+  else
+    vec->data[ index ] = val;
+      
+  return;
+}
+
+// function that puts the value into matrix
+void put_m( matrix_t mat, const size_t row, const size_t col, const double val ) {
+  if( !is_valid_m( mat ) )
+    SENGI_ERR( INVALID_MAT );
+  else if( row < 0 || row >= mat->row )
+    SENGI_ERR( INVALID_ROW );
+  else if( col < 0 || col >= mat->col )
+    SENGI_ERR( INVALID_COL );
+  else
+    mat->data[ row ][ col ] = val;
+	  
+  return;
+}
+
+// function that fills the vector with val
+void fill_v( vector_t vec, const double val ) {
   size_t i;
 
   if( is_valid_v( vec ) ) {  
     for( i=0 ; i < vec->size ; ++i )
-      vec->data[ i ] = val;
-
-    return TRUE;
+      vec->data[ i ] = val;  
   }
+  else
+    SENGI_ERR( INVALID_VEC );
   
-  return FALSE;
+  return;
 }
 
-bool_t fill_m( matrix_t mat, const double val ) {
+// function that fills the matrix with val
+void fill_m( matrix_t mat, const double val ) {
   size_t i, j;
 
   if( is_valid_m( mat ) ) {  
     for( i=0 ; i < mat->row ; ++i ) {
       for( j=0 ; j < mat->col ; ++j )
 	mat->data[ i ][ j ] = val;
-    }
-  
-    return TRUE;
+    }  
   }
-
-  return FALSE;
+  else
+    SENGI_ERR( INVALID_MAT );
+  
+  return;
 }
 
 void copy_v( const vector_t src, vector_t des ) {
@@ -160,8 +201,12 @@ void copy_v( const vector_t src, vector_t des ) {
       for( i=0 ; i < src->size ; ++i )
 	src->data[ i ] = des->data[ i ];
     }
+    else
+      SENGI_ERR( NOT_MATCH_SIZE );
   }
-
+  else
+    SENGI_ERR( INVALID_VEC );
+  
   return;
 }
 
@@ -208,6 +253,33 @@ size_t norm_m( const matrix_t mat ) {
   }
 
   return -1;
+}
+
+bool_t diagonal_m( matrix_t mat, vector_t vec ) {
+  size_t i, j;
+  
+  if( !is_valid_m( mat ) ) {
+    SENGI_ERR( "the matrix is invalid" );
+    return FALSE;
+  }
+  else if( !is_valid_v( vec ) ) {
+    SENGI_ERR( "the vector is invalid" );
+    return FALSE;
+  }
+  else if( mat->col != vec->size ) {
+    SENGI_ERR( "the matrix and vector sizes do not match" );
+    return FALSE;
+  }
+  else if( mat->col > mat->row ) {
+    SENGI_ERR( "the row must be bigger than the column" );
+    return FALSE;
+  }
+  else {
+    for( i=0 ; i < mat->row ; ++i )
+      vec->data[ i ] = mat->data[ i ][ i ];
+    
+    return TRUE;
+  }
 }
 
 void extend_mv( matrix_t mat, const vector_t vec ) {
@@ -383,6 +455,27 @@ bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec ) {
   }
 
   return FALSE;
+}
+
+void replace_rows_m( matrix_t mat, int row1, int row2 ) {
+  size_t j;
+  double temp;
+  
+  if( !is_valid_m( mat ) )
+    SENGI_ERR( "the matrix is invalid" );
+  else if( row1 < 0 || row1 >= mat->row )
+    SENGI_ERR( "row1 is invalid" );
+  else if( row2 < 0 || row2 >= mat->row )
+    SENGI_ERR( "row2 is invalid" );
+  else {
+    for( j=0 ; j < mat->col ; ++j ) {
+      temp = mat->data[ row1 ][ j ];
+      mat->data[ row1 ][ j ] = mat->data[ row2 ][ j ];
+      mat->data[ row2 ][ j ] = temp;
+    }
+  }
+  
+  return;
 }
 
 void add_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
@@ -677,43 +770,27 @@ void print_m( const matrix_t mat ) {
 }
 
 bool_t is_valid_v( const vector_t vec ) {
-  if( NULL == vec ) {
-    SENGI_ERR( "the vector is null" );
+  if( NULL == vec )
     return FALSE;
-  }
-  else if( vec->size < 1 ) {
-    SENGI_ERR( "the vector size is invalid" );
+  else if( vec->size < 1 )
     return FALSE;
-  }
-  else if( NULL == vec->data ) {
-    SENGI_ERR( "the vector data is null" );
+  else if( NULL == vec->data )
     return FALSE;
-  }
-  else if( !(RVEC == vec->type || CVEC == vec->type) ) {
-    SENGI_ERR( "the vector type is invalid" );
+  else if( !(RVEC == vec->type || CVEC == vec->type) )
     return FALSE;
-  }
   else
     return TRUE;
 }
 
 bool_t is_valid_m( const matrix_t mat ) {
-  if( NULL == mat ) {
-    SENGI_ERR( "the matrix is null" );
+  if( NULL == mat )
     return FALSE;
-  }
-  else if( mat->row < 1 || mat->col < 1 ) {
-    SENGI_ERR( "the matrix row or column is invalid" );
+  else if( mat->row < 1 || mat->col < 1 )
     return FALSE;
-  }
-  else if( NULL == mat->data ) {
-    SENGI_ERR( "the matrix data is null" );
+  else if( NULL == mat->data )
     return FALSE;
-  }
-  else if( NULL == mat->data[ 0 ] ) {
-    SENGI_ERR( "the matrix data is null" );
+  else if( NULL == mat->data[ 0 ] )
     return FALSE;
-  }
   else
     return TRUE;
 }

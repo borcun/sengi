@@ -9,11 +9,10 @@
 #include <math.h>
 #include <string.h>
 #include "types.h"
+#include "error.h"
 
 #ifndef BASE_H
 #define BASE_H
-
-#define SENGI_ERR( msg ) fprintf( stderr, "%s\n", msg )
 
 /// \brief function that creates a row vector
 /// @param len - vector element size
@@ -48,17 +47,32 @@ void release_v( vector_t vec );
 /// @return -
 void release_m( matrix_t mat );
 
+/// \brief function that puts the value into the vector
+/// @param vec - vector
+/// @param index - index
+/// @param val - value
+/// @return -
+void put_v( vector_t vec, const size_t index, const double val );
+
+/// \brief function that puts the value into the matrix
+/// @param mat - matrix
+/// @param row - row index
+/// @param col - column index
+/// @param val - value
+/// @return -
+void put_m( matrix_t mat, const size_t row, const size_t col, const double val );
+
 /// \brief function that fills vector with value
 /// @param vec - vector
 /// @param val - value
-/// @return if filling is success, return true. Otherwise, return false.
-bool_t fill_v( vector_t vec, const double val );
+/// @return -
+void fill_v( vector_t vec, const double val );
 		   
 /// \brief function that fills matrix with value
 /// @param mat - matrix
 /// @param param - parameter
-/// @return if filling is success, return true. Otherwise, return false.
-bool_t fill_m( matrix_t mat, const double val );
+/// @return -
+void fill_m( matrix_t mat, const double val );
 
 /// \brief function that copies source vector to destination vector
 /// @param src - source vector
@@ -81,6 +95,12 @@ size_t norm_v( const vector_t vec );
 /// @param mat - matrix
 /// @return if the matrix is valid, return norm of matrix. Otherwise, return -1.
 size_t norm_m( const matrix_t mat );
+
+/// \brief function that gets diagonal of matrix
+/// @param mat - matrix
+/// @param vec - vector
+/// @return if the matrix is suitable for finding diagonal, return true. Otherwise, return false.
+bool_t diagonal_m( matrix_t mat, vector_t diag );
 
 /// \brief function that extends matrix with the vector according to vector type
 /// @param mat - matrix
@@ -119,6 +139,13 @@ bool_t get_row_m( const matrix_t mat, const size_t row, vector_t vec );
 /// @param vec - vector
 /// @return if operation is success, return true. Otherwise, return false.
 bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec );
+
+/// \brief function that replaces rows of matrix
+/// @param mat - matrix
+/// @param row1 - first row index
+/// @param row2 - second row index
+/// @return -
+void replace_rows_m( matrix_t mat, int row1, int row2 );
 
 /// \brief function that adds two matrices
 /// @param mat1 - first matrix
