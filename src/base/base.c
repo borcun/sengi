@@ -110,6 +110,29 @@ matrix_t create_m( const size_t row, const size_t col ) {
   return mat;
 }
 
+// function that create identity matrix
+matrix_t create_im(size_t size)
+{
+	matrix_ret = create_m(size,size) ; 
+	// create size by size square matrix
+
+  	size_t i,j;
+  	// fill zeros , except diagonals by one;
+  	for (i=0;i<size;++i)
+  	{
+  		for(j=0;j<size;++j)
+      	{
+			if(i==j)
+	  			ret->data[i][j] = 1 ;
+			else
+	  			ret->data[i][j] = 0 ;
+      	}
+  	}
+    	
+  	return ret ;
+
+} 
+
 // function that releases the vector
 void release_v( vector_t vec ) {
   if( is_valid_v( vec ) ) {
@@ -734,7 +757,20 @@ void transpose_m( const matrix_t src, matrix_t des ) {
 
 // function that finds inverse matrix of the matrix
 void inverse_m( const matrix_t src, matrix_t des ) {
-  return;
+  /*Gauss Elimination
+   [ A | I] -> [I | A^-1] 
+*/
+
+  // check square matrix
+
+  if (src->row != src->col)
+    SENGI_ERR (SQUARE_MATRIX);
+  
+  //  create identity matrix
+  matrix_t identity = create_im (src->row);
+  
+
+ return;
 }
 
 // function that eliminates the source matrix
