@@ -97,7 +97,7 @@ matrix_t create_m( const size_t row, const size_t col ) {
       SENGI_ERR( MEM_ALLOC );
 
       for( j=0 ; j < i ; ++j )
-	free( mat->data[ j ] );
+				free( mat->data[ j ] );
 
       free( mat );
       return NULL;
@@ -111,26 +111,20 @@ matrix_t create_m( const size_t row, const size_t col ) {
 }
 
 // function that create identity matrix
-matrix_t create_im(size_t size)
-{
-	matrix_ret = create_m(size,size) ; 
-	// create size by size square matrix
+matrix_t create_im( const size_t size ) {
+ 	size_t i;
+	matrix_t identity = create_m( size, size ); 
 
-  	size_t i,j;
-  	// fill zeros , except diagonals by one;
-  	for (i=0;i<size;++i)
-  	{
-  		for(j=0;j<size;++j)
-      	{
-			if(i==j)
-	  			ret->data[i][j] = 1 ;
-			else
-	  			ret->data[i][j] = 0 ;
-      	}
-  	}
-    	
-  	return ret ;
+	if( is_valid_m( identity ) ) {
+		fill_m( identity, 0.0 );
 
+		for( i = 0 ; i < size ; ++i )
+			identity->data[ i ][ i ] = 1.0;
+  
+		return identity;
+	}
+
+	return NULL;
 } 
 
 // function that releases the vector
@@ -207,7 +201,7 @@ void fill_m( matrix_t mat, const double val ) {
   if( is_valid_m( mat ) ) {  
     for( i=0 ; i < mat->row ; ++i ) {
       for( j=0 ; j < mat->col ; ++j )
-	mat->data[ i ][ j ] = val;
+				mat->data[ i ][ j ] = val;
     }  
   }
   else
@@ -748,7 +742,7 @@ void transpose_m( const matrix_t src, matrix_t des ) {
   else {
     for( i=0 ; i < src->col ; ++i ) {
       for( j=0 ; j < src->row ; ++j )
-	des->data[ i ][ j ] = src->data[ j ][ i ];
+				des->data[ i ][ j ] = src->data[ j ][ i ];
     }
   }
 
@@ -757,17 +751,23 @@ void transpose_m( const matrix_t src, matrix_t des ) {
 
 // function that finds inverse matrix of the matrix
 void inverse_m( const matrix_t src, matrix_t des ) {
+  matrix_t identity;
   /*Gauss Elimination
    [ A | I] -> [I | A^-1] 
-*/
+  */
 
-  // check square matrix
-
-  if (src->row != src->col)
-    SENGI_ERR (SQUARE_MATRIX);
+  if( src->row != src->col )
+    SENGI_ERR( SQUARE_MATRIX );
   
-  //  create identity matrix
-  matrix_t identity = create_im (src->row);
+	identity = create_im( src->row );
+  
+	if( !is_valid_m( identity ) ) {
+		SENGI_ERR( INVALID_MAT );
+		return;
+	}
+
+	//  create identity matrix
+
   
 
  return;

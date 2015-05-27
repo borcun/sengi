@@ -32,10 +32,9 @@ vector_t create_cv( const size_t size );
 matrix_t create_m( const size_t row, const size_t col );
 
 /// \brief function that creates identity matrix
-/// @param row - matrix row size
-/// @param col - matrix column size
+/// @param size - matrix size
 /// @return if matrix is created, return the matrix. Otherwise, return NULL.
-matrix_t create_im( const size_t row, const size_t col );
+matrix_t create_im( const size_t size );
 
 /// \brief function that releases vector
 /// @param vec - vector
