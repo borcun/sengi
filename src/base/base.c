@@ -4,7 +4,7 @@
 vector_t create_rv( const size_t size ) {
   vector_t vec;
   
-  if( 0 > size ) {
+  if( 1 > size ) {
     SENGI_ERR( INVALID_SIZE );
     return NULL;
   }
@@ -34,7 +34,7 @@ vector_t create_rv( const size_t size ) {
 vector_t create_cv( const size_t size ) {
   vector_t vec;
   
-  if( 0 > size ) {
+  if( 1 > size ) {
     SENGI_ERR( INVALID_SIZE );
     return NULL;
   }
@@ -65,12 +65,12 @@ matrix_t create_m( const size_t row, const size_t col ) {
   size_t i, j;
   matrix_t mat;
 
-  if( row < 0 ) {
+  if( row < 1 ) {
     SENGI_ERR( INVALID_ROW );
     return NULL;
   }
 
-  if( col < 0 ) {
+  if( col < 1 ) {
     SENGI_ERR( INVALID_COL );
     return NULL;
   }
@@ -158,7 +158,7 @@ void release_m( matrix_t mat ) {
 void put_v( vector_t vec, const size_t index, const double val ) {
   if( !is_valid_v( vec ) )
     SENGI_ERR( INVALID_VEC );
-  else if( index < 0 || index >= vec->size )
+  else if( index >= vec->size )
     SENGI_ERR( INVALID_INDEX );
   else
     vec->data[ index ] = val;
@@ -170,9 +170,9 @@ void put_v( vector_t vec, const size_t index, const double val ) {
 void put_m( matrix_t mat, const size_t row, const size_t col, const double val ) {
   if( !is_valid_m( mat ) )
     SENGI_ERR( INVALID_MAT );
-  else if( row < 0 || row >= mat->row )
+  else if( row >= mat->row )
     SENGI_ERR( INVALID_ROW );
-  else if( col < 0 || col >= mat->col )
+  else if( col >= mat->col )
     SENGI_ERR( INVALID_COL );
   else
     mat->data[ row ][ col ] = val;

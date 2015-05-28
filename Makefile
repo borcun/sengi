@@ -10,7 +10,8 @@ MV = mv
 all: ${SRC}
 	${CC} -c -Wall ${SRC} -I ${INC}
 	${MV} *.o src
-	${AR} -cvq lib/libsengi.a src/base.o
+	${AR} -cvq lib/libbase.a src/base.o
+	${AR} -cvq lib/libutil.a src/util.o
 
 clean: ${OBJ}
 	${RM} -rf ${OBJ} ${LIB}
