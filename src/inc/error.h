@@ -20,6 +20,8 @@
 #define INVALID_SIZE   "the size value is invalid"
 #define INVALID_INDEX  "the index value is invalid"
 #define INVALID_DATA   "the data is invalid"
+#define INVALID_PATH   "the file path is invalid"
+#define NOT_OPENED     "the file can not be opened"
 #define MUST_COL_VEC   "the vector must be column vector"
 #define MUST_ROW_VEC   "the vector must be row vector"
 #define MATCH_ROW      "the matrix rows do not match"
@@ -30,4 +32,5 @@
 #define MATCH_COL_SIZE "the matrix column and the vector size do not match" 
 #define CROSS_PRODUCT  "the vector sizes have to be 3D"
 #define SQUARE_MATRIX  "the matrix must be square"
+
 #endif
