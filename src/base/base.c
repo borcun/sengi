@@ -751,24 +751,62 @@ void transpose_m( const matrix_t src, matrix_t des ) {
 
 // function that finds inverse matrix of the matrix
 void inverse_m( const matrix_t src, matrix_t des ) {
-  matrix_t identity;
+  matrix_t mat = create_m (src->row,src->row);
+  size_t i,j,k,n = src->row;
+  double ratio;
+  
+  des = create_im( src->row );
+  copy_m (src,mat);
   /*Gauss Elimination
    [ A | I] -> [I | A^-1] 
   */
-
-  if( src->row != src->col )
+   
+  if( src->row != src->col ){
     SENGI_ERR( SQUARE_MATRIX );
-  
-	identity = create_im( src->row );
-  
-	if( !is_valid_m( identity ) ) {
+    return ;
+  }
+	if( !is_valid_m( des ) || !is_valid_m( mat )) {
 		SENGI_ERR( INVALID_MAT );
 		return;
 	}
 
-	//  create identity matrix
+  // forward elimination
+  for( i=0 ; i < (n-1) ; ++i ){
+    for( j=i+1 ; j < n ; ++j ){
+      if ( mat->data[ i ][ i ] == 0)
+        continue;
 
-  
+      ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
+      for( k=0 ; k < n ; ++k ){
+        mat->data[ j ][ k ] = mat->data[ j ][ k ] - mat->data[ i ][ k ]*ratio;
+        des->data[ j ][ k ] = des->data[ j ][ k ] - des->data[ i ][ k ]*ratio;
+      }
+    }
+  }
+
+  //backward elimination
+	for( i=n-1 ; i > 0 ; --i ){
+    for( j=i-1 ; j >= 0 ; --j ){
+      if ( mat->data[ i ][ i ] == 0)
+        continue;
+
+      ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
+      for( k=0 ; k < n ; ++k ){
+        mat->data[ j ][ k ] = mat->data[ j ][ k ] - mat->data[ i ][ k ]*ratio;
+        des->data[ j ][ k ] = des->data[ j ][ k ] - des->data[ i ][ k ]*ratio;
+      }
+    }
+  }
+
+  //dividing elements
+  for( i=0 ; i < n ; ++i ){
+    ratio = mat->data[ i ][ i ];
+    mat->data[ i ][ i ] = mat->data[ i ][ i ] / mat->data[ i ][ i ]; 
+    for( j=0 ; j < n ; ++j ){
+      des->data[ i ][ i ] = des->data[ i ][ i ] / ratio ;
+    }
+  }
+
 
  return;
 }
