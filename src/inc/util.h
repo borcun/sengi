@@ -13,12 +13,12 @@
 
 /// \brief function that reads a vector from file
 /// @param path - file path
-/// @return if a vector can be created, return it. Otherwise, return NULL.
+/// @return vector or NULL
 vector_t read_v( const char *path );
 
 /// \brief function that reads a matrix from file
 /// @param path - file path
-/// @return if a matrix can be created, return it. Otherwise, return NULL.
+/// @return matrix or NULL
 matrix_t read_m( const char *path );
 
 /// \brief function that writes a vector into file

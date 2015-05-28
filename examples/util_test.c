@@ -1,12 +1,19 @@
 #include "util.h"
 
 int main() {
-	vector_t vec;
+  vector_t vec;
+  matrix_t mat;
 
-	vec = read_v( "vec.dat" );
+  mat = read_m( "mat.dat" );
+  vec = read_v( "vec.dat" );
 
-	if( NULL != vec )
-		print_v( vec );
+  if( NULL != vec )
+    print_v( vec );
 
-	return 0;
+  printf( "\n" );
+  
+  if( NULL != mat )
+    print_m( mat );
+  
+  return 0;
 }

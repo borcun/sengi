@@ -112,19 +112,19 @@ matrix_t create_m( const size_t row, const size_t col ) {
 
 // function that create identity matrix
 matrix_t create_im( const size_t size ) {
- 	size_t i;
-	matrix_t identity = create_m( size, size ); 
-
-	if( is_valid_m( identity ) ) {
-		fill_m( identity, 0.0 );
-
-		for( i = 0 ; i < size ; ++i )
-			identity->data[ i ][ i ] = 1.0;
+  size_t i;
+  matrix_t identity = create_m( size, size ); 
   
-		return identity;
-	}
-
-	return NULL;
+  if( is_valid_m( identity ) ) {
+    fill_m( identity, 0.0 );
+    
+    for( i = 0 ; i < size ; ++i )
+      identity->data[ i ][ i ] = 1.0;
+    
+    return identity;
+  }
+  
+  return NULL;
 } 
 
 // function that releases the vector
