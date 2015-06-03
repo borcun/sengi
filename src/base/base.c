@@ -828,14 +828,56 @@ void inverse_m( const matrix_t src, matrix_t des ) {
 // function that eliminates the source matrix
 // Gauss Elimination
 void eliminate_m( const matrix_t src, matrix_t des ) {
-  if( !is_valid_m( src ) || !is_valid_m( des ) )
-    SENGI_ERR( INVALID_MAT );
-  else if( src->row != des->col || src->col != des->row )
-    SENGI_ERR( MATCH_ROW_COL );
-  else {
-    // perform elimination
-  }
+	int i, j, k, n = src->row;
+  double ratio;
+     
+	if( !is_valid_m( src ) || !is_valid_m( des ) ) {
+		SENGI_ERR( INVALID_MAT );
+		return;
+	}
   
+	if( src->row != src->col || des->row != des->col ) {
+    SENGI_ERR( SQUARE_MATRIX );
+    return;
+  }
+
+	if( src->row != des->row ) {
+		SENGI_ERR( MATCH_ROW_COL );
+		return;
+	}
+
+  copy_m( src, des );
+	
+  // forward elimination
+  for( i=0 ; i < n-1 ; ++i ) {
+    for( j=i+1 ; j < n ; ++j ) {
+			// if divider is 0, jump over the row
+			if ( src->data[ i ][ i ] != 0.0 ) {
+				ratio = src->data[ j ][ i ] / src->data[ i ][ i ] ;
+				
+				for( k=i ; k < n ; ++k )
+					des->data[ j ][ k ] -= src->data[ i ][ k ] * ratio;
+      }
+    }
+  }
+
+	// division
+  for( i=0 ; i < n ; ++i ) {		
+		for( j=0 ; j < n ; ++j ) {
+			// if divider is 0, jump over the row
+			if ( des->data[ i ][ j ] != 0.0 ) {
+				ratio = des->data[ i ][ j ];
+					
+				for( k=0 ; k < n ; ++k )
+					des->data[ i ][ k ] /= ratio;
+					
+				break;
+			}
+		}
+	}
+
+	// todo
+
   return;
 }
 
@@ -897,7 +939,7 @@ void print_m( const matrix_t mat ) {
   else {
     for( i=0 ; i < mat->row ; ++i ) {
       for( j=0 ; j < mat->col ; ++j )
-	fprintf( stdout, "%f ", mat->data[ i ][ j ] );
+				fprintf( stdout, "%f ", mat->data[ i ][ j ] );
       fprintf( stdout, "%s", "\n" );
     }
 
