@@ -798,7 +798,7 @@ void inverse_m( const matrix_t src, matrix_t des ) {
       }
     }
   }
-
+	
   // backward elimination
 	for( i=n-1 ; i > 0 ; --i ) {
     for( j=i-1 ; j >= 0 ; --j ) {
