@@ -1,5 +1,4 @@
-- header path will be fixed in source files.
-- inverse of matrices
 - determinant
 - utility headers
 ! put functions can not work in Mac OS X because segmentation fault occurs.
+! do not use size_t counter in any loop which counts down because of counter overflow
