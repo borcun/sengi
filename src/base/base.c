@@ -750,65 +750,71 @@ void transpose_m( const matrix_t src, matrix_t des ) {
 }
 
 // function that finds inverse matrix of the matrix
+// Gauss - Jordan Elimination : [ A | I ] -> [ I | A^-1 ] 
 void inverse_m( const matrix_t src, matrix_t des ) {
-  matrix_t mat = create_m (src->row,src->row);
-  size_t i,j,k,n = src->row;
+  matrix_t mat;
+  int i, j, k, n = src->row;
   double ratio;
+     
+	if( !is_valid_m( src ) || !is_valid_m( des ) ) {
+		SENGI_ERR( INVALID_MAT );
+		return;
+	}
   
-  des = create_im( src->row );
-  copy_m (src,mat);
-  /*Gauss Elimination
-   [ A | I] -> [I | A^-1] 
-  */
-   
-  if( src->row != src->col ){
+	if( src->row != src->col ) {
     SENGI_ERR( SQUARE_MATRIX );
-    return ;
+    return;
   }
-	if( !is_valid_m( des ) || !is_valid_m( mat )) {
+	
+	mat = create_m( src->row, src->row );
+
+	if( !is_valid_m( mat ) ) {
 		SENGI_ERR( INVALID_MAT );
 		return;
 	}
 
-  // forward elimination
-  for( i=0 ; i < (n-1) ; ++i ){
-    for( j=i+1 ; j < n ; ++j ){
-      if ( mat->data[ i ][ i ] == 0)
-        continue;
+  des = create_im( src->row );
+  copy_m( src, mat );
 
-      ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
-      for( k=0 ; k < n ; ++k ){
-        mat->data[ j ][ k ] = mat->data[ j ][ k ] - mat->data[ i ][ k ]*ratio;
-        des->data[ j ][ k ] = des->data[ j ][ k ] - des->data[ i ][ k ]*ratio;
+  // forward elimination
+  for( i=0 ; i < (n-1) ; ++i ) {
+    for( j=i+1 ; j < n ; ++j ) {
+			// if divider is 0, jump over the row
+			if ( mat->data[ i ][ i ] != 0.0 ) {
+				ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
+
+				for( k=0 ; k < n ; ++k ) {
+					mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
+					des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
+				}
       }
     }
   }
 
-  //backward elimination
-	for( i=n-1 ; i > 0 ; --i ){
-    for( j=i-1 ; j >= 0 ; --j ){
-      if ( mat->data[ i ][ i ] == 0)
-        continue;
+  // backward elimination
+	for( i=n-1 ; i > 0 ; --i ) {
+    for( j=i-1 ; j >= 0 ; --j ) {
+      if ( mat->data[ i ][ i ] != 0.0 ) {
+				ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
 
-      ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
-      for( k=0 ; k < n ; ++k ){
-        mat->data[ j ][ k ] = mat->data[ j ][ k ] - mat->data[ i ][ k ]*ratio;
-        des->data[ j ][ k ] = des->data[ j ][ k ] - des->data[ i ][ k ]*ratio;
-      }
+				for( k=0 ; k < n ; ++k ) {			
+					mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
+					des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
+				}
+			}
     }
   }
 
   //dividing elements
-  for( i=0 ; i < n ; ++i ){
+  for( i=0 ; i < n ; ++i ) {
     ratio = mat->data[ i ][ i ];
-    mat->data[ i ][ i ] = mat->data[ i ][ i ] / mat->data[ i ][ i ]; 
-    for( j=0 ; j < n ; ++j ){
-      des->data[ i ][ i ] = des->data[ i ][ i ] / ratio ;
-    }
+    mat->data[ i ][ i ] /= ratio;
+
+    for( j=0 ; j < n ; ++j )
+      des->data[ i ][ j ] /= ratio;
   }
 
-
- return;
+	return;
 }
 
 // function that eliminates the source matrix
@@ -910,7 +916,7 @@ bool_t is_valid_v( const vector_t vec ) {
 bool_t is_valid_m( const matrix_t mat ) {
   if( NULL == mat )
     return FALSE;
-  else if( mat->row < 1 || mat->col < 1 )
+  else if( mat->row < 2 || mat->col < 2 )
     return FALSE;
   else if( NULL == mat->data )
     return FALSE;
