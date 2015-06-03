@@ -16,6 +16,7 @@ int main() {
 	put_m( mat, 2, 2, 6 );
 
 	inverse_m( mat, inv );
+	print_m( inv );
 
 	release_m( mat );
 	release_m( inv );

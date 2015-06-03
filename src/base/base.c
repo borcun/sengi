@@ -65,12 +65,12 @@ matrix_t create_m( const size_t row, const size_t col ) {
   size_t i, j;
   matrix_t mat;
 
-  if( row < 1 ) {
+  if( row < 2 ) {
     SENGI_ERR( INVALID_ROW );
     return NULL;
   }
 
-  if( col < 1 ) {
+  if( col < 2 ) {
     SENGI_ERR( INVALID_COL );
     return NULL;
   }
@@ -91,7 +91,7 @@ matrix_t create_m( const size_t row, const size_t col ) {
   }
 
   for( i=0 ; i < row ; ++i ) {
-    mat->data[ i ] = ( double * ) calloc( DEFAULT_VAL, col * sizeof( double ) );
+    mat->data[ i ] = ( double * ) malloc( col * sizeof( double ) );
 
     if( NULL == mat->data[ i ] ) {
       SENGI_ERR( MEM_ALLOC );
@@ -761,10 +761,15 @@ void inverse_m( const matrix_t src, matrix_t des ) {
 		return;
 	}
   
-	if( src->row != src->col ) {
+	if( src->row != src->col || des->row != des->col ) {
     SENGI_ERR( SQUARE_MATRIX );
     return;
   }
+
+	if( src->row != des->row ) {
+		SENGI_ERR( MATCH_ROW_COL );
+		return;
+	}
 	
 	mat = create_m( src->row, src->row );
 
@@ -773,8 +778,11 @@ void inverse_m( const matrix_t src, matrix_t des ) {
 		return;
 	}
 
-  des = create_im( src->row );
   copy_m( src, mat );
+	fill_m( des, 0.0 );
+
+	for( i=0 ; i < n ; ++i )
+		put_m( des, i, i, 1.0 );
 
   // forward elimination
   for( i=0 ; i < (n-1) ; ++i ) {
@@ -818,6 +826,7 @@ void inverse_m( const matrix_t src, matrix_t des ) {
 }
 
 // function that eliminates the source matrix
+// Gauss Elimination
 void eliminate_m( const matrix_t src, matrix_t des ) {
   if( !is_valid_m( src ) || !is_valid_m( des ) )
     SENGI_ERR( INVALID_MAT );
