@@ -249,6 +249,17 @@ void print_v( const vector_t vec );
 /// @return -
 void print_m( const matrix_t m );
 
+
+/// \brief function that find minors
+///@param src - matrix , row , col index
+///@return - minors of that matrix
+matrix_t minors (matrix_t src , size_t row , size_t col);
+
+/// \brief fucntion that find the detarminant
+///@param src - matrix
+///@return deteminant of matrix
+double det (matrix_t src);
+
 /// \brief function that checks whether the vector is valid
 /// @param vec - vector
 /// @return if the vector is valid, return true. Otherwise, return false. 

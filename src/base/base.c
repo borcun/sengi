@@ -881,6 +881,84 @@ void eliminate_m( const matrix_t src, matrix_t des ) {
   return;
 }
 
+//function that find the minor of a matrix
+matrix_t minors (matrix_t src , size_t row , size_t col)
+{
+	size_t i,j,a,b;
+	matrix_t n_mat = create_m (src->row - 1 , src->col - 1);
+
+	for (i = 0, a = 0; i < src->row; ++i)
+	{
+		if (i == row)
+			continue;
+		else
+		{
+			for (j = 0, b = 0; j < src->col; ++j)
+			{
+				if (j == col)
+					continue;
+				else
+				{
+					n_mat->data[ a ][ b ] = src->data[ i ][ j ];
+					b++;
+
+				}
+			}
+			a++;
+		}
+	}
+
+	return n_mat;
+}
+
+//function that calculate the determinant
+double det (matrix_t src)
+{
+
+	if( src->row != src->col) {
+    SENGI_ERR( SQUARE_MATRIX );
+    return;
+  }
+
+	size_t i,j,n = src->row ;
+
+	if (n==1){
+		return src->data[ 0 ][ 0 ];
+	}
+
+	else if(n==2){
+		return (src->data[ 0 ][ 0 ] * src->data[ 1 ][ 1 ]) - (src->data[ 0 ][ 1 ] * src->data[ 1 ][ 0 ]);
+	}
+
+	else if(n==3){
+		
+		return (
+		(src->data[ 0 ][ 0 ] * src->data[ 1 ][ 1 ] * src->data[ 2 ][ 2 ])
+		+(src->data[ 1 ][ 0 ] * src->data[ 2 ][ 1 ] * src->data[ 0 ][ 2 ])
+		+(src->data[ 2 ][ 0 ] * src->data[ 0 ][ 1 ] * src->data[ 1 ][ 2 ])
+		-(src->data[ 0 ][ 2 ] * src->data[ 1 ][ 1 ] * src->data[ 2 ][ 0 ])
+		-(src->data[ 1 ][ 2 ] * src->data[ 2 ][ 1 ] * src->data[ 0 ][ 0 ])
+		-(src->data[ 2 ][ 2 ] * src->data[ 0 ][ 1 ] * src->data[ 1 ][ 0 ])
+		);
+
+	}
+
+	else {
+		double return_value = 0.0 ;
+		for ( i=0 ; i < src->row ; ++i){
+			for( j=0 ; j< src->col ; ++j) {
+
+				return_value += pow (-1, (i+j+2) ) * src->data[ i ][ j ] * det (minors(src , i , j )) ;
+
+			}
+
+		}
+
+		return return_value;		
+	}
+
+}
+
 // function that scales the vector with val
 void scale_v( vector_t vec, const double val ) {
   size_t i;
