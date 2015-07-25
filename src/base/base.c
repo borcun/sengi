@@ -97,7 +97,7 @@ matrix_t create_m( const size_t row, const size_t col ) {
       SENGI_ERR( MEM_ALLOC );
 
       for( j=0 ; j < i ; ++j )
-				free( mat->data[ j ] );
+	free( mat->data[ j ] );
 
       free( mat );
       return NULL;
@@ -201,7 +201,7 @@ void fill_m( matrix_t mat, const double val ) {
   if( is_valid_m( mat ) ) {  
     for( i=0 ; i < mat->row ; ++i ) {
       for( j=0 ; j < mat->col ; ++j )
-				mat->data[ i ][ j ] = val;
+	mat->data[ i ][ j ] = val;
     }  
   }
   else
@@ -756,60 +756,60 @@ void inverse_m( const matrix_t src, matrix_t des ) {
   int i, j, k, n = src->row;
   double ratio;
      
-	if( !is_valid_m( src ) || !is_valid_m( des ) ) {
-		SENGI_ERR( INVALID_MAT );
-		return;
-	}
+  if( !is_valid_m( src ) || !is_valid_m( des ) ) {
+    SENGI_ERR( INVALID_MAT );
+    return;
+  }
   
-	if( src->row != src->col || des->row != des->col ) {
+  if( src->row != src->col || des->row != des->col ) {
     SENGI_ERR( SQUARE_MATRIX );
     return;
   }
 
-	if( src->row != des->row ) {
-		SENGI_ERR( MATCH_ROW_COL );
-		return;
-	}
+  if( src->row != des->row ) {
+    SENGI_ERR( MATCH_ROW_COL );
+    return;
+  }
 	
-	mat = create_m( src->row, src->row );
-
-	if( !is_valid_m( mat ) ) {
-		SENGI_ERR( INVALID_MAT );
-		return;
-	}
+  mat = create_m( src->row, src->row );
+  
+  if( !is_valid_m( mat ) ) {
+    SENGI_ERR( INVALID_MAT );
+    return;
+  }
 
   copy_m( src, mat );
-	fill_m( des, 0.0 );
+  fill_m( des, 0.0 );
 
-	for( i=0 ; i < n ; ++i )
-		put_m( des, i, i, 1.0 );
+  for( i=0 ; i < n ; ++i )
+    put_m( des, i, i, 1.0 );
 
   // forward elimination
   for( i=0 ; i < (n-1) ; ++i ) {
     for( j=i+1 ; j < n ; ++j ) {
-			// if divider is 0, jump over the row
-			if ( mat->data[ i ][ i ] != 0.0 ) {
-				ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
-
-				for( k=0 ; k < n ; ++k ) {
-					mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
-					des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
-				}
+      // if divider is 0, jump over the row
+      if ( mat->data[ i ][ i ] != 0.0 ) {
+	ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
+	
+	for( k=0 ; k < n ; ++k ) {
+	  mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
+	  des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
+	}
       }
     }
   }
-	
+  
   // backward elimination
-	for( i=n-1 ; i > 0 ; --i ) {
+  for( i=n-1 ; i > 0 ; --i ) {
     for( j=i-1 ; j >= 0 ; --j ) {
       if ( mat->data[ i ][ i ] != 0.0 ) {
-				ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
+	ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
 
-				for( k=0 ; k < n ; ++k ) {			
-					mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
-					des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
-				}
-			}
+	for( k=0 ; k < n ; ++k ) {			
+	  mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
+	  des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
+	}
+      }
     }
   }
 
@@ -822,7 +822,7 @@ void inverse_m( const matrix_t src, matrix_t des ) {
       des->data[ i ][ j ] /= ratio;
   }
 
-	return;
+  return;
 }
 
 // function that eliminates the source matrix
@@ -851,112 +851,98 @@ void eliminate_m( const matrix_t src, matrix_t des ) {
   // forward elimination
   for( i=0 ; i < n-1 ; ++i ) {
     for( j=i+1 ; j < n ; ++j ) {
-			// if divider is 0, jump over the row
-			if ( src->data[ i ][ i ] != 0.0 ) {
-				ratio = src->data[ j ][ i ] / src->data[ i ][ i ] ;
-				
-				for( k=i ; k < n ; ++k )
-					des->data[ j ][ k ] -= src->data[ i ][ k ] * ratio;
+      // if divider is 0, jump over the row
+      if ( src->data[ i ][ i ] != 0.0 ) {
+	ratio = src->data[ j ][ i ] / src->data[ i ][ i ] ;
+	
+	for( k=i ; k < n ; ++k )
+	  des->data[ j ][ k ] -= src->data[ i ][ k ] * ratio;
       }
     }
   }
 
-	// division
+  // division
   for( i=0 ; i < n ; ++i ) {		
-		for( j=0 ; j < n ; ++j ) {
-			// if divider is 0, jump over the row
-			if ( des->data[ i ][ j ] != 0.0 ) {
-				ratio = des->data[ i ][ j ];
-					
-				for( k=0 ; k < n ; ++k )
-					des->data[ i ][ k ] /= ratio;
-					
-				break;
-			}
-		}
-	}
-
-	// todo
-
+    for( j=0 ; j < n ; ++j ) {
+      // if divider is 0, jump over the row
+      if ( des->data[ i ][ j ] != 0.0 ) {
+	ratio = des->data[ i ][ j ];
+	
+	for( k=0 ; k < n ; ++k )
+	  des->data[ i ][ k ] /= ratio;
+	
+	break;
+      }
+    }
+  }
+  
+  // todo
+  
   return;
 }
 
-//function that find the minor of a matrix
-matrix_t minors (matrix_t src , size_t row , size_t col)
-{
-	size_t i,j,a,b;
-	matrix_t n_mat = create_m (src->row - 1 , src->col - 1);
+// function that find the minor of a matrix
+matrix_t minors( matrix_t src , size_t row , size_t col ) {
+  size_t i, j, a = 0, b = 0;
+  matrix_t n_mat;
 
-	for (i = 0, a = 0; i < src->row; ++i)
-	{
-		if (i == row)
-			continue;
-		else
-		{
-			for (j = 0, b = 0; j < src->col; ++j)
-			{
-				if (j == col)
-					continue;
-				else
-				{
-					n_mat->data[ a ][ b ] = src->data[ i ][ j ];
-					b++;
+  if( !is_valid_m( src ) ) {
+    SENGI_ERR( INVALID_MAT );
+    return NULL;
+  }
+  
+  n_mat = create_m( src->row - 1 , src->col - 1 );
 
-				}
-			}
-			a++;
-		}
+  for( i = 0 ; i < src->row ; ++i ) {
+    if( i != row ) {
+      for( j = 0 ; j < src->col ; ++j ) {
+	if (j != col) {
+	  n_mat->data[ a ][ b ] = src->data[ i ][ j ];
+	  ++b;	
 	}
-
-	return n_mat;
-}
-
-//function that calculate the determinant
-double det (matrix_t src)
-{
-
-	if( src->row != src->col) {
-    SENGI_ERR( SQUARE_MATRIX );
-    return;
+      }
+      ++a;
+    }
   }
 
-	size_t i,j,n = src->row ;
+  return n_mat;
+}
 
-	if (n==1){
-		return src->data[ 0 ][ 0 ];
-	}
+// function that calculate the determinant
+double det( matrix_t src ) {
+  size_t i, j;
+  double retval = 0.0;
+    
+  if( src->row != src->col ) {
+    SENGI_ERR( SQUARE_MATRIX );
+    return -1;
+  }
 
-	else if(n==2){
-		return (src->data[ 0 ][ 0 ] * src->data[ 1 ][ 1 ]) - (src->data[ 0 ][ 1 ] * src->data[ 1 ][ 0 ]);
-	}
+  if( 1 == src->row )
+    retval = src->data[ 0 ][ 0 ];
+  else if( 2 == src->row )
+    retval = ( src->data[ 0 ][ 0 ] * src->data[ 1 ][ 1 ] ) - ( src->data[ 0 ][ 1 ] * src->data[ 1 ][ 0 ] );
+  else if( 3 == src->row ) {
+    retval = (
+	     ( src->data[ 0 ][ 0 ] * src->data[ 1 ][ 1 ] * src->data[ 2 ][ 2 ] )
+	    +( src->data[ 1 ][ 0 ] * src->data[ 2 ][ 1 ] * src->data[ 0 ][ 2 ] )
+	    +( src->data[ 2 ][ 0 ] * src->data[ 0 ][ 1 ] * src->data[ 1 ][ 2 ] )
+	    -( src->data[ 0 ][ 2 ] * src->data[ 1 ][ 1 ] * src->data[ 2 ][ 0 ] )
+	    -( src->data[ 1 ][ 2 ] * src->data[ 2 ][ 1 ] * src->data[ 0 ][ 0 ] )
+	    -( src->data[ 2 ][ 2 ] * src->data[ 0 ][ 1 ] * src->data[ 1 ][ 0 ] )
+	    );
+  }
+  else {
+    retval = 0.0 ;
 
-	else if(n==3){
-		
-		return (
-		(src->data[ 0 ][ 0 ] * src->data[ 1 ][ 1 ] * src->data[ 2 ][ 2 ])
-		+(src->data[ 1 ][ 0 ] * src->data[ 2 ][ 1 ] * src->data[ 0 ][ 2 ])
-		+(src->data[ 2 ][ 0 ] * src->data[ 0 ][ 1 ] * src->data[ 1 ][ 2 ])
-		-(src->data[ 0 ][ 2 ] * src->data[ 1 ][ 1 ] * src->data[ 2 ][ 0 ])
-		-(src->data[ 1 ][ 2 ] * src->data[ 2 ][ 1 ] * src->data[ 0 ][ 0 ])
-		-(src->data[ 2 ][ 2 ] * src->data[ 0 ][ 1 ] * src->data[ 1 ][ 0 ])
-		);
+    for ( i=0 ; i < src->row ; ++i ) {
+      for( j=0 ; j < src->col ; ++j ) {
+	retval += pow( -1, ( i + j + 2 ) ) * src->data[ i ][ j ] * det( minors( src , i , j ) );	
+      } 
+    }
+  }
 
-	}
-
-	else {
-		double return_value = 0.0 ;
-		for ( i=0 ; i < src->row ; ++i){
-			for( j=0 ; j< src->col ; ++j) {
-
-				return_value += pow (-1, (i+j+2) ) * src->data[ i ][ j ] * det (minors(src , i , j )) ;
-
-			}
-
-		}
-
-		return return_value;		
-	}
-
+  return retval;
 }
 
 // function that scales the vector with val
