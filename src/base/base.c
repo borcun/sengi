@@ -935,10 +935,11 @@ double det( matrix_t src ) {
   else {
     retval = 0.0 ;
 
-    for ( i=0 ; i < src->row ; ++i ) {
+    for ( i=0 ;  ;  ) {
       for( j=0 ; j < src->col ; ++j ) {
 	retval += pow( -1, ( i + j + 2 ) ) * src->data[ i ][ j ] * det( minors( src , i , j ) );	
       } 
+      break ;
     }
   }
 
