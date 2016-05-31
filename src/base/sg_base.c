@@ -811,7 +811,7 @@ void transpose_m( const sg_matrix src, sg_matrix des ) {
 // function that finds inverse matrix of the matrix
 // Gauss - Jordan Elimination : [ A | I ] -> [ I | A^-1 ] 
 void inverse_m( const sg_matrix src, sg_matrix des ) {
-  sg_matrix mat;
+  sg_matrix mat = { 0, 0, NULL };
   int i, j, k, n = src.row;
   double ratio;
      
@@ -939,7 +939,7 @@ void eliminate_m( const sg_matrix src, sg_matrix des ) {
     }
   }
   
-  // todo
+  // TODO:
   
   return;
 }
