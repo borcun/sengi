@@ -1,13 +1,13 @@
 /**
- * @file error.h
+ * @file sg_error.h
  * @brief error header
  * @author boo
  * @date May 10, 2015
  * @copyright free software
  */
 
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef SG_ERROR_H
+#define SG_ERROR_H
 
 //! sengi error function
 #define SENGI_ERR( msg ) fprintf( stderr, "%s\n", msg )

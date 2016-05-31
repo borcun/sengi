@@ -10,8 +10,8 @@ MV = mv
 all: ${SRC}
 	${CC} -c -Wall ${SRC} -I ${INC}
 	${MV} *.o src
-	${AR} -cvq lib/libbase.a src/base.o
-	${AR} -cvq lib/libutil.a src/util.o
+	${AR} -cvq lib/libsgbase.a src/sg_base.o
+	${AR} -cvq lib/libsgutil.a src/sg_util.o
 
 clean: ${OBJ}
 	${RM} -rf ${OBJ} ${LIB}

@@ -1,8 +1,8 @@
 #include "../inc/util.h"
 
 // function that reads a vector from file
-vector_t read_v( const char *path ) {
-  vector_t vec;
+sg_vector read_v( const char *path ) {
+  sg_vector vec;
   FILE *fptr;
   size_t i;
   size_t size;
@@ -42,8 +42,8 @@ vector_t read_v( const char *path ) {
 }
 
 // function that reads a matrix from file
-matrix_t read_m( const char *path ) {
-  matrix_t mat;
+sg_matrix read_m( const char *path ) {
+  sg_matrix mat;
   FILE *fptr;
   size_t i, j;
   size_t row, col;
@@ -91,11 +91,11 @@ matrix_t read_m( const char *path ) {
 }
 
 // function that writes a vector into file
-void write_v( const char *path, const vector_t vec ) {
+void write_v( const char *path, const sg_vector vec ) {
   return;
 }
 
 // function that writes a matrix into file
-void write_m( const char *path, const matrix_t mat ) {
+void write_m( const char *path, const sg_matrix mat ) {
   return;
 }

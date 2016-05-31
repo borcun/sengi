@@ -1,324 +1,323 @@
-#include "base.h"
+#include "sg_base.h"
 
 // function that create a row vector
-vector_t create_rv( const size_t size ) {
-  vector_t vec;
+sg_vector create_rv( const size_t size ) {
+  sg_vector vec = { 0, SG_INVVEC, NULL };
   
   if( 1 > size ) {
     SENGI_ERR( INVALID_SIZE );
-    return NULL;
+    return vec;
   }
-  
-  vec = ( vector_t ) malloc( sizeof( struct vector_t ) );
+   
+  vec.data = ( double * ) calloc( SG_DEFAULT_VALUE, size * sizeof( double ) );
 
-  if( NULL == vec ) {
+  if( NULL == vec.data ) {
     SENGI_ERR( MEM_ALLOC );
-    return NULL;
-  }
-  
-  vec->data = ( double * ) calloc( DEFAULT_VAL, size * sizeof( double ) );
-
-  if( NULL == vec->data ) {
-    SENGI_ERR( MEM_ALLOC );
-    free( vec );
-    return NULL;
+    return vec;
   }
 
-  vec->type = RVEC;
-  vec->size = size;
+  vec.type = RVEC;
+  vec.size = size;
  
   return vec;
 }
 
 // function that creates a column vector
-vector_t create_cv( const size_t size ) {
-  vector_t vec;
+sg_vector create_cv( const size_t size ) {
+  sg_vector vec = { 0, SG_INVVEC, NULL };
   
   if( 1 > size ) {
     SENGI_ERR( INVALID_SIZE );
-    return NULL;
+    return vec;
   }
   
-  vec = ( vector_t ) malloc( sizeof( struct vector_t ) );
+  vec.data = ( double * ) calloc( SG_DEFAULT_VALUE, size * sizeof( double ) );
 
-  if( NULL == vec ) {
+  if( NULL == vec.data ) {
     SENGI_ERR( MEM_ALLOC );
-    return NULL;
-  }
-  
-  vec->data = ( double * ) calloc( DEFAULT_VAL, size * sizeof( double ) );
-
-  if( NULL == vec->data ) {
-    SENGI_ERR( MEM_ALLOC );
-    free( vec );
-    return NULL;
+    return vec;
   }
 
-  vec->type = CVEC;
-  vec->size = size;
+  vec.type = CVEC;
+  vec.size = size;
 
   return vec;
 }
 
 // function that creates a matrix
-matrix_t create_m( const size_t row, const size_t col ) {
-  size_t i, j;
-  matrix_t mat;
+sg_matrix create_m( const size_t row, const size_t col ) {
+  int i, j;
+  sg_matrix mat = { 0, 0, NULL };
 
   if( row < 2 ) {
     SENGI_ERR( INVALID_ROW );
-    return NULL;
+    return mat;
   }
 
   if( col < 2 ) {
     SENGI_ERR( INVALID_COL );
-    return NULL;
+    return mat;
   }
 
-  mat = ( matrix_t ) malloc( sizeof( struct matrix_t ) );
+  mat.data = ( double ** ) malloc( row * sizeof( double * ) );
 
-  if( NULL == mat ) {
+  if( NULL == mat.data ) {
     SENGI_ERR( MEM_ALLOC );
-    return NULL;
-  }
-
-  mat->data = ( double ** ) malloc( row * sizeof( double * ) );
-
-  if( NULL == mat->data ) {
-    SENGI_ERR( MEM_ALLOC );
-    free( mat );
-    return NULL;
+    return mat;
   }
 
   for( i=0 ; i < row ; ++i ) {
-    mat->data[ i ] = ( double * ) malloc( col * sizeof( double ) );
+    mat.data[ i ] = ( double * ) calloc( SG_DEFAULT_VALUE, col * sizeof( double ) );
 
-    if( NULL == mat->data[ i ] ) {
+    if( NULL == mat.data[ i ] ) {
       SENGI_ERR( MEM_ALLOC );
 
-      for( j=0 ; j < i ; ++j )
-	free( mat->data[ j ] );
+      for( j=0 ; j < i ; ++j ) {
+	free( mat.data[ j ] );
+      }
 
-      free( mat );
-      return NULL;
+      return mat;
     }
   }
 
-  mat->row = row;
-  mat->col = col;
+  mat.row = row;
+  mat.col = col;
 
   return mat;
 }
 
 // function that create identity matrix
-matrix_t create_im( const size_t size ) {
-  size_t i;
-  matrix_t identity = create_m( size, size ); 
+sg_matrix create_im( const size_t size ) {
+  int i;
+  sg_matrix identity = create_m( size, size ); 
   
-  if( is_valid_m( identity ) ) {
-    fill_m( identity, 0.0 );
-    
-    for( i = 0 ; i < size ; ++i )
+  if( is_valid_m( identity ) ) {    
+    for( i = 0 ; i < size ; ++i ) {
       identity->data[ i ][ i ] = 1.0;
-    
-    return identity;
+    }
+  }
+  else {
+    SENGI_ERR( INVALID_MAT );
   }
   
-  return NULL;
+  return identity;
 } 
 
 // function that releases the vector
-void release_v( vector_t vec ) {
+void release_v( sg_vector vec ) {
   if( is_valid_v( vec ) ) {
-    free( vec->data );
-    free( vec );
+    free( vec.data );
   }
-  else
+  else {
     SENGI_ERR( INVALID_VEC );
+  }
   
   return;
 }
 
 // function that releases the matrix
-void release_m( matrix_t mat ) {
-  size_t i;
+void release_m( sg_matrix mat ) {
+  int i;
 
   if( is_valid_m( mat ) ) {
-    for( i=0 ; i < mat->row ; ++i )
-      free( mat->data[ i ] );
-    free( mat );
+    for( i=0 ; i < mat.row ; ++i )
+      free( mat.data[ i ] );
   }
-  else
+  else {
     SENGI_ERR( INVALID_MAT );
+  }
   
   return;
 }
 
 // function that puts the value into the vector
-void put_v( vector_t vec, const size_t index, const double val ) {
-  if( !is_valid_v( vec ) )
+void put_v( sg_vector vec, const size_t index, const double val ) {
+  if( !is_valid_v( vec ) ) {
     SENGI_ERR( INVALID_VEC );
-  else if( index >= vec->size )
+  }
+  else if( index >= vec.size ) {
     SENGI_ERR( INVALID_INDEX );
-  else
-    vec->data[ index ] = val;
+  }
+  else {
+    vec.data[ index ] = val;
+  }
       
   return;
 }
 
 // function that puts the value into matrix
-void put_m( matrix_t mat, const size_t row, const size_t col, const double val ) {
-  if( !is_valid_m( mat ) )
+void put_m( sg_matrix mat, const size_t row, const size_t col, const double val ) {
+  if( !is_valid_m( mat ) ) {
     SENGI_ERR( INVALID_MAT );
-  else if( row >= mat->row )
+  }
+  else if( row >= mat.row ) {
     SENGI_ERR( INVALID_ROW );
-  else if( col >= mat->col )
+  }
+  else if( col >= mat.col ) {
     SENGI_ERR( INVALID_COL );
-  else
-    mat->data[ row ][ col ] = val;
+  }
+  else {
+    mat.data[ row ][ col ] = val;
+  }
 	  
   return;
 }
 
 // function that fills the vector with val
-void fill_v( vector_t vec, const double val ) {
-  size_t i;
+void fill_v( sg_vector vec, const double val ) {
+  int i;
 
-  if( is_valid_v( vec ) ) {  
-    for( i=0 ; i < vec->size ; ++i )
-      vec->data[ i ] = val;  
+  if( is_valid_v( vec ) ) {
+    for( i=0 ; i < vec.size ; ++i ) {
+      vec.data[ i ] = val;
+    }
   }
-  else
+  else {
     SENGI_ERR( INVALID_VEC );
+  }
   
   return;
 }
 
 // function that fills the matrix with val
-void fill_m( matrix_t mat, const double val ) {
-  size_t i, j;
+void fill_m( sg_matrix mat, const double val ) {
+  int i, j;
 
   if( is_valid_m( mat ) ) {  
-    for( i=0 ; i < mat->row ; ++i ) {
-      for( j=0 ; j < mat->col ; ++j )
-	mat->data[ i ][ j ] = val;
+    for( i=0 ; i < mat.row ; ++i ) {
+      for( j=0 ; j < mat.col ; ++j ) {
+	mat.data[ i ][ j ] = val;
+      }
     }  
   }
-  else
+  else {
     SENGI_ERR( INVALID_MAT );
+  }
   
   return;
 }
 
 // function that copies the source vector to the destination vector
-void copy_v( const vector_t src, vector_t des ) {
-  size_t i;
+void copy_v( const sg_vector src, sg_vector des ) {
+  int i;
   
   if( is_valid_v( src ) && is_valid_v( des ) ) {
     if( src->size == des->size ) {
-      for( i=0 ; i < src->size ; ++i )
+      for( i=0 ; i < src->size ; ++i ) {
 	src->data[ i ] = des->data[ i ];
+      }
     }
-    else
+    else {
       SENGI_ERR( MATCH_SIZE );
+    }
   }
-  else
+  else {
     SENGI_ERR( INVALID_VEC );
+  }
   
   return;
 }
 
 // function that copies the source matrix to the destination matrix
-void copy_m( const matrix_t src, matrix_t des ) {
-  size_t i, j;
+void copy_m( const sg_matrix src, sg_matrix des ) {
+  int i, j;
 
   if( is_valid_m( src ) && is_valid_m( des ) ) {
     if( src->row == des->row ) {
       if( src->col == des->col ) {
 	for( i=0 ; i < src->row ; ++i ) {
-	  for( j=0 ; j < src->col ; ++j )
+	  for( j=0 ; j < src->col ; ++j ) {
 	    des->data[ i ][ j ] = src->data[ i ][ j ];
+	  }
 	}
       }
-      else
+      else {
 	SENGI_ERR( MATCH_COL );
+      }
     }
-    else
+    else {
       SENGI_ERR( MATCH_ROW );
+    }
   }
-  else
+  else {
     SENGI_ERR( INVALID_MAT );
+  }
 
   return;
 }
 
 // function that returns norm of the vector
-size_t norm_v( const vector_t vec ) {
-  double total = 0.0;
-  size_t i;
+size_t norm_v( const sg_vector vec ) {
+  double total = SG_DEFAULT_VALUE;
+  int i;
   
   if( is_valid_v( vec ) ) {
-    for( i=0 ; i < vec->size ; ++i )
-      total += pow( vec->data[ i ], 2 );
-
-    return sqrt( total );
-  }
-  else
-    SENGI_ERR( INVALID_VEC );
-  
-  return -1;
-}
-
-// function that returns norm of the matrix
-size_t norm_m( const matrix_t mat ) {
-  double total = 0.0;
-  size_t i, j;
-
-  if( is_valid_m( mat ) ) {
-    for( i=0 ; i < mat->row ; ++i ) {
-      for( j=0 ; j < mat->col ; ++j )
-	total += pow( mat->data[ i ][ j ], 2 );
+    for( i=0 ; i < vec.size ; ++i ) {
+      total += pow( vec.data[ i ], 2 );
     }
 
     return sqrt( total );
   }
-  else
-    SENGI_ERR( INVALID_MAT );
+  else {
+    SENGI_ERR( INVALID_VEC );
+  }
   
-  return -1;
+  return SG_INVALID_VALUE;
+}
+
+// function that returns norm of the matrix
+size_t norm_m( const sg_matrix mat ) {
+  double total = SG_DEFAULT_VALUE;
+  int i, j;
+
+  if( is_valid_m( mat ) ) {
+    for( i=0 ; i < mat.row ; ++i ) {
+      for( j=0 ; j < mat.col ; ++j ) {
+	total += pow( mat.data[ i ][ j ], 2 );
+      }
+    }
+
+    return sqrt( total );
+  }
+  else {
+    SENGI_ERR( INVALID_MAT );
+  }
+  
+  return SG_INVALID_VALUE;
 }
 
 // function that finds diagonal vector of the matrix
-bool_t diagonal_m( matrix_t mat, vector_t vec ) {
-  size_t i;
+sg_bool diagonal_m( sg_matrix mat, sg_vector vec ) {
+  int i;
   
   if( !is_valid_m( mat ) ) {
     SENGI_ERR( "the matrix is invalid" );
-    return FALSE;
+    return SG_FALSE;
   }
   else if( !is_valid_v( vec ) ) {
     SENGI_ERR( "the vector is invalid" );
-    return FALSE;
+    return SG_FALSE;
   }
-  else if( mat->col != vec->size ) {
+  else if( mat.col != vec.size ) {
     SENGI_ERR( "the matrix and vector sizes do not match" );
-    return FALSE;
+    return SG_FALSE;
   }
-  else if( mat->col > mat->row ) {
+  else if( mat.col > mat.row ) {
     SENGI_ERR( "the row must be bigger than the column" );
-    return FALSE;
+    return SG_FALSE;
   }
   else {
-    for( i=0 ; i < mat->row ; ++i )
-      vec->data[ i ] = mat->data[ i ][ i ];
+    for( i=0 ; i < mat.row ; ++i ) {
+      vec.data[ i ] = mat.data[ i ][ i ];
+    }
     
-    return TRUE;
+    return SG_TRUE;
   }
 }
 
 // function that extends the matrix with vector
-void extend_mv( matrix_t mat, const vector_t vec ) {
-  size_t i, j;
+void extend_mv( sg_matrix mat, const sg_vector vec ) {
+  intt i, j;
   size_t row, col;
   double **data;
 
@@ -327,20 +326,21 @@ void extend_mv( matrix_t mat, const vector_t vec ) {
   else if( !is_valid_v( vec ) )
     SENGI_ERR( INVALID_VEC );
   else {
-    switch( vec->type ) {
+    switch( vec.type ) {
     case RVEC:
-      if( mat->col != vec->size )
+      if( mat.col != vec.size ) {
 	SENGI_ERR( MATCH_COL_SIZE );
+      }
       else {
-	data = ( double ** ) malloc( sizeof( double * ) * ( mat->row + 1 ) );
+	data = ( double ** ) malloc( sizeof( double * ) * ( mat.row + 1 ) );
 
 	if( NULL == data ) {
 	  SENGI_ERR( MEM_ALLOC );
 	  return;
 	}
 
-	for( i=0 ; i < mat->row ; ++i ) {
-	  data[ i ] = ( double * ) malloc( sizeof( double ) * mat->col );
+	for( i=0 ; i < mat.row ; ++i ) {
+	  data[ i ] = ( double * ) malloc( sizeof( double ) * mat.col );
 
 	  if( NULL == data[ i ] ) {
 	    SENGI_ERR( MEM_ALLOC );
@@ -352,12 +352,12 @@ void extend_mv( matrix_t mat, const vector_t vec ) {
 	    return;
 	  }
 	
-	  memcpy( data[ i ], mat->data[ i ], mat->col );
+	  memcpy( data[ i ], mat.data[ i ], mat.col );
 	}
 
-	memcpy( data[ mat->row ], vec->data, vec->size );
-	row = mat->row + 1;
-	col = mat->col;
+	memcpy( data[ mat.row ], vec.data, vec.size );
+	row = mat.row + 1;
+	col = mat.col;
 	
 	release_m( mat );
 	mat = create_m( row, col );
@@ -369,18 +369,18 @@ void extend_mv( matrix_t mat, const vector_t vec ) {
       } // end of else
       break;
     case CVEC:
-      if( mat->row != vec->size )
+      if( mat.row != vec.size )
 	SENGI_ERR( MATCH_ROW_SIZE );
       else {
-	data = ( double ** ) malloc( sizeof( double * ) * mat->row );
+	data = ( double ** ) malloc( sizeof( double * ) * mat.row );
 
 	if( NULL == data ) {
 	  SENGI_ERR( MEM_ALLOC );
 	  return;
 	}
 
-	for( i=0 ; i < mat->row ; ++i ) {
-	  data[ i ] = ( double * ) malloc( sizeof( double ) * ( mat->col + 1 ) );
+	for( i=0 ; i < mat.row ; ++i ) {
+	  data[ i ] = ( double * ) malloc( sizeof( double ) * ( mat.col + 1 ) );
 
 	  if( NULL == data[ i ] ) {
 	    SENGI_ERR( MEM_ALLOC );
@@ -393,13 +393,13 @@ void extend_mv( matrix_t mat, const vector_t vec ) {
 	  }
 
 	  // copy whole row data to row of new data array
-	  memcpy( data[ i ], mat->data[ i ], mat->col );
+	  memcpy( data[ i ], mat.data[ i ], mat.col );
 	  // add the data of column vector to end of row
-	  data[ i ][ mat->col ] = vec->data[ i ];
+	  data[ i ][ mat.col ] = vec.data[ i ];
 	}
 
-	row = mat->row;
-	col = mat->col + 1;
+	row = mat.row;
+	col = mat.col + 1;
 	
 	release_m( mat );
 	mat = create_m( row, col );
@@ -420,99 +420,99 @@ void extend_mv( matrix_t mat, const vector_t vec ) {
 }
 
 // function that extends the matrix with another matrix
-void extend_mm( matrix_t aug, const matrix_t mat ) {
+void extend_mm( sg_matrix aug, const sg_matrix mat ) {
   return;
 }
 
 // function that converts the array to the vector
-bool_t to_v( vector_t vec, double *data ) {
+sg_bool to_v( sg_vector vec, double *data ) {
   size_t i;
   
   if( !is_valid_v( vec ) ) {
     SENGI_ERR( INVALID_VEC );
-    return FALSE;
+    return SG_FALSE;
   }
   else if( NULL == data ) {
     SENGI_ERR( INVALID_DATA );
-    return FALSE;
+    return SG_FALSE;
   }
   else {
-    for( i=0 ; i < vec->size ; ++i )
-      vec->data[ i ] = data[ i ];
+    for( i=0 ; i < vec.size ; ++i )
+      vec.data[ i ] = data[ i ];
 
-    return TRUE;
+    return SG_TRUE;
   }
 }
 
 // function that converts the array to the matrix
-bool_t to_m( matrix_t mat, double **data ) {
+sg_bool to_m( sg_matrix mat, double **data ) {
   size_t i, j;
   
   if( !is_valid_m( mat ) ) {
     SENGI_ERR( INVALID_MAT );
-    return FALSE;
+    return SG_FALSE;
   }
   else if( NULL == data ) {
     SENGI_ERR( INVALID_DATA );
-    return FALSE;
+    return SG_FALSE;
   }
   else {
-    for( i=0 ; i < mat->row ; ++i ) {
-      for( j=0 ; j < mat->col ; ++j )
-	mat->data[ i ][ j ] = data[ i ][ j ];
+    for( i=0 ; i < mat.row ; ++i ) {
+      for( j=0 ; j < mat.col ; ++j )
+	mat.data[ i ][ j ] = data[ i ][ j ];
     }
     
-    return TRUE;
+    return SG_TRUE;
   }
 }
 
 // function that gets a row of the matrix
-bool_t get_row_m( const matrix_t mat, const size_t row, vector_t vec ) {
+sg_bool get_row_m( const sg_matrix mat, const size_t row, sg_vector vec ) {
   if( is_valid_m( mat ) && is_valid_v( vec ) ) {
-    if( mat->col != vec->size ) {
+    if( mat.col != vec.size ) {
       SENGI_ERR( MATCH_COL_SIZE );
-      return FALSE;
+      return SG_FALSE;
     }
 
-    return to_v( vec, mat->data[ row ] );
+    return to_v( vec, mat.data[ row ] );
   }
 
-  return FALSE;
+  return SG_FALSE;
 }
 
 // function that gets a column of the matrix
-bool_t get_col_m( const matrix_t mat, const size_t col, vector_t vec ) {
+sg_bool get_col_m( const sg_matrix mat, const size_t col, sg_vector vec ) {
   size_t i;
   
   if( is_valid_m( mat ) && is_valid_v( vec ) ) {
-    if( mat->row != vec->size ) {
+    if( mat.row != vec.size ) {
       SENGI_ERR( MATCH_ROW_SIZE );
-      return FALSE;
+      return SG_FALSE;
     }
 
-    for( i=0 ; i < mat->row ; ++i )
-      vec->data[ i ] = mat->data[ i ][ col ];
+    for( i=0 ; i < mat.row ; ++i )
+      vec.data[ i ] = mat.data[ i ][ col ];
     
-    return TRUE;
+    return SG_TRUE;
   }
 
-  return FALSE;
+  return SG_FALSE;
 }
 
 // function that replace rows of the matrix
-void replace_rows_m( matrix_t mat, int row1, int row2 ) {
+void replace_rows_m( sg_matrix mat, int row1, int row2 ) {
   size_t j;
   double temp;
   
   if( !is_valid_m( mat ) )
     SENGI_ERR( INVALID_MAT );
-  else if( ( row1 < 0 || row1 >= mat->row ) && ( row2 < 0 || row2 >= mat->row ) )
+  else if( ( row1 < 0 || row1 >= mat.row ) && ( row2 < 0 || row2 >= mat.row ) )
     SENGI_ERR( INVALID_ROW );
   else {
-    for( j=0 ; j < mat->col ; ++j ) {
-      temp = mat->data[ row1 ][ j ];
-      mat->data[ row1 ][ j ] = mat->data[ row2 ][ j ];
-      mat->data[ row2 ][ j ] = temp;
+    for( j=0 ; j < mat.col ; ++j ) {
+      temp = mat.data[ row1 ][ j ];
+      mat.data[ row1 ][ j ] = mat.data[ row2 ][ j ];
+      mat.data[ row2 ][ j ] = temp;
     }
   }
   
@@ -520,7 +520,7 @@ void replace_rows_m( matrix_t mat, int row1, int row2 ) {
 }
 
 // function that adds two matrices
-void add_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
+void add_mm( const sg_matrix mat1, const sg_matrix mat2, sg_matrix res ) {
   size_t i, j;
   
   if( is_valid_m( mat1 ) && is_valid_m( mat2 ) && is_valid_m( res ) ) {
@@ -540,7 +540,7 @@ void add_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
 }
 
 // function that substracts two matrices
-void sub_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
+void sub_mm( const sg_matrix mat1, const sg_matrix mat2, sg_matrix res ) {
   size_t i, j;
   
   if( is_valid_m( mat1 ) && is_valid_m( mat2 ) && is_valid_m( res ) ) {
@@ -561,9 +561,9 @@ void sub_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
 }
 
 // function that multiplies two matrices
-void mult_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
+void mult_mm( const sg_matrix mat1, const sg_matrix mat2, sg_matrix res ) {
   size_t i, j, k;
-  double temp = 0.0;
+  double temp = SG_DEFAULT_VALUE;
   
   if( is_valid_m( mat1 ) && is_valid_m( mat2 ) && is_valid_m( res ) ) {
     if( mat1->col != mat2->row )
@@ -579,7 +579,7 @@ void mult_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
 	    temp += mat1->data[ i ][ j ] * mat2->data[ j ][ k ];
 
 	  res->data[ i ][ k ] = temp;
-	  temp = 0.0;
+	  temp = SG_DEFAULT_VALUE;
 	}
       }
     }
@@ -591,28 +591,28 @@ void mult_mm( const matrix_t mat1, const matrix_t mat2, matrix_t res ) {
 }
 
 // function that multiplies the matrix and the vector
-void mult_mv( const matrix_t mat, const vector_t vec, vector_t res ) {
+void mult_mv( const sg_matrix mat, const sg_vector vec, sg_vector res ) {
   size_t i, j;
-  double total = 0.0;
+  double total = SG_DEFAULT_VALUE;
   
   if( !is_valid_m( mat ) )
     SENGI_ERR( INVALID_MAT );
   else if( !is_valid_v( vec ) || !is_valid_v( res ) )
     SENGI_ERR( INVALID_VEC );
   else {
-    if( mat->col != vec->size )
+    if( mat.col != vec.size )
       SENGI_ERR( MATCH_COL_SIZE );
-    else if( mat->row != res->size )
+    else if( mat.row != res->size )
       SENGI_ERR( MATCH_ROW_SIZE );
-    else if( vec->type != CVEC || res->type != CVEC )
+    else if( vec.type != CVEC || res->type != CVEC )
       SENGI_ERR( MUST_COL_VEC );
     else {
-      for( i=0 ; i < mat->row ; ++i ) {
-	for( j=0 ; j < mat->col ; ++j )
-	  total += mat->data[ i ][ j ] * vec->data[ j ];
+      for( i=0 ; i < mat.row ; ++i ) {
+	for( j=0 ; j < mat.col ; ++j )
+	  total += mat.data[ i ][ j ] * vec.data[ j ];
 
 	res->data[ i ] = total;
-	total = 0.0;
+	total = SG_DEFAULT_VALUE;
       }
     }
   }
@@ -621,28 +621,28 @@ void mult_mv( const matrix_t mat, const vector_t vec, vector_t res ) {
 }
 
 // function that multiplies the vector and the matrix
-void mult_vm( const vector_t vec, const matrix_t mat, vector_t res ) {
+void mult_vm( const sg_vector vec, const sg_matrix mat, sg_vector res ) {
   size_t i, j;
-  double total = 0.0;
+  double total = SG_DEFAULT_VALUE;
   
   if( !is_valid_m( mat ) )
     SENGI_ERR( INVALID_MAT );
   else if( is_valid_v( vec ) && is_valid_v( res ) )
     SENGI_ERR( INVALID_VEC );
   else {
-    if( mat->row != vec->size )
+    if( mat.row != vec.size )
       SENGI_ERR( MATCH_ROW_SIZE );
-    else if( mat->col != res->size )
+    else if( mat.col != res->size )
       SENGI_ERR( MATCH_COL_SIZE );
-    else if( vec->type != RVEC || res->type != RVEC )
+    else if( vec.type != RVEC || res->type != RVEC )
       SENGI_ERR( MUST_ROW_VEC );
     else {
-      for( i=0 ; i < mat->col ; ++i ) {
-	for( j=0 ; j < mat->row ; ++j )
-	  total += vec->data[ j ] * mat->data[ j ][ i ];
+      for( i=0 ; i < mat.col ; ++i ) {
+	for( j=0 ; j < mat.row ; ++j )
+	  total += vec.data[ j ] * mat.data[ j ][ i ];
 
 	res->data[ i ] = total;
-	total = 0.0;
+	total = SG_DEFAULT_VALUE;
       }
     }
   }
@@ -651,7 +651,7 @@ void mult_vm( const vector_t vec, const matrix_t mat, vector_t res ) {
 }
 
 // function that adds two vectors
-void add_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
+void add_vv( const sg_vector vec1, const sg_vector vec2, sg_vector res ) {
   size_t i;
   
   if( is_valid_v( vec1 ) && is_valid_v( vec2 ) && is_valid_v( res ) ) {
@@ -669,7 +669,7 @@ void add_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
 }
 
 // function that substracts two vectors
-void sub_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
+void sub_vv( const sg_vector vec1, const sg_vector vec2, sg_vector res ) {
   size_t i;
   
   if( is_valid_v( vec1 ) && is_valid_v( vec2 ) && is_valid_v( res ) ) {
@@ -687,7 +687,7 @@ void sub_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
 }
 
 // function that finds dot product of two vectors
-void dot_product_vv( const vector_t vec1, const vector_t vec2, double *res ) {
+void dot_product_vv( const sg_vector vec1, const sg_vector vec2, double *res ) {
   size_t i;
   
   if( is_valid_v( vec1 ) && is_valid_v( vec2 ) ) {
@@ -696,7 +696,7 @@ void dot_product_vv( const vector_t vec1, const vector_t vec2, double *res ) {
 	 ( vec1->type == CVEC && vec2->type == RVEC ) ) )
       {
 	if( NULL == res )
-	  res = ( double *) calloc( 0.0, sizeof( double ) );
+	  res = ( double *) calloc( SG_DEFAULT_VALUE, sizeof( double ) );
 
 	if( NULL != res ) {
 	  for( i=0 ; i < vec1->size ; ++i )
@@ -717,7 +717,7 @@ void dot_product_vv( const vector_t vec1, const vector_t vec2, double *res ) {
 }
 
 // function that finds cross product of the vectors
-void cross_product_vv( const vector_t vec1, const vector_t vec2, vector_t res ) {
+void cross_product_vv( const sg_vector vec1, const sg_vector vec2, sg_vector res ) {
   if( !is_valid_v( vec1 ) || !is_valid_v( vec2 ) || !is_valid_v( res ) )
     SENGI_ERR( INVALID_VEC );
   else if( vec1->size != 3 || vec2->size != 3 || res->size != 3 )
@@ -732,7 +732,7 @@ void cross_product_vv( const vector_t vec1, const vector_t vec2, vector_t res ) 
 }
 
 // function that finds transpose of the matrix
-void transpose_m( const matrix_t src, matrix_t des ) {
+void transpose_m( const sg_matrix src, sg_matrix des ) {
   size_t i, j;
 
   if( !is_valid_m( src ) || !is_valid_m( des ) )
@@ -751,8 +751,8 @@ void transpose_m( const matrix_t src, matrix_t des ) {
 
 // function that finds inverse matrix of the matrix
 // Gauss - Jordan Elimination : [ A | I ] -> [ I | A^-1 ] 
-void inverse_m( const matrix_t src, matrix_t des ) {
-  matrix_t mat;
+void inverse_m( const sg_matrix src, sg_matrix des ) {
+  sg_matrix mat;
   int i, j, k, n = src->row;
   double ratio;
      
@@ -779,7 +779,7 @@ void inverse_m( const matrix_t src, matrix_t des ) {
   }
 
   copy_m( src, mat );
-  fill_m( des, 0.0 );
+  fill_m( des, SG_DEFAULT_VALUE );
 
   for( i=0 ; i < n ; ++i )
     put_m( des, i, i, 1.0 );
@@ -788,11 +788,11 @@ void inverse_m( const matrix_t src, matrix_t des ) {
   for( i=0 ; i < (n-1) ; ++i ) {
     for( j=i+1 ; j < n ; ++j ) {
       // if divider is 0, jump over the row
-      if ( mat->data[ i ][ i ] != 0.0 ) {
-	ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
+      if ( mat.data[ i ][ i ] != SG_DEFAULT_VALUE ) {
+	ratio = mat.data[ j ][ i ] / mat.data[ i ][ i ] ;
 	
 	for( k=0 ; k < n ; ++k ) {
-	  mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
+	  mat.data[ j ][ k ] -= mat.data[ i ][ k ] * ratio;
 	  des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
 	}
       }
@@ -802,11 +802,11 @@ void inverse_m( const matrix_t src, matrix_t des ) {
   // backward elimination
   for( i=n-1 ; i > 0 ; --i ) {
     for( j=i-1 ; j >= 0 ; --j ) {
-      if ( mat->data[ i ][ i ] != 0.0 ) {
-	ratio = mat->data[ j ][ i ] / mat->data[ i ][ i ] ;
+      if ( mat.data[ i ][ i ] != SG_DEFAULT_VALUE ) {
+	ratio = mat.data[ j ][ i ] / mat.data[ i ][ i ] ;
 
 	for( k=0 ; k < n ; ++k ) {			
-	  mat->data[ j ][ k ] -= mat->data[ i ][ k ] * ratio;
+	  mat.data[ j ][ k ] -= mat.data[ i ][ k ] * ratio;
 	  des->data[ j ][ k ] -= des->data[ i ][ k ] * ratio;
 	}
       }
@@ -815,8 +815,8 @@ void inverse_m( const matrix_t src, matrix_t des ) {
 
   //dividing elements
   for( i=0 ; i < n ; ++i ) {
-    ratio = mat->data[ i ][ i ];
-    mat->data[ i ][ i ] /= ratio;
+    ratio = mat.data[ i ][ i ];
+    mat.data[ i ][ i ] /= ratio;
 
     for( j=0 ; j < n ; ++j )
       des->data[ i ][ j ] /= ratio;
@@ -827,7 +827,7 @@ void inverse_m( const matrix_t src, matrix_t des ) {
 
 // function that eliminates the source matrix
 // Gauss Elimination
-void eliminate_m( const matrix_t src, matrix_t des ) {
+void eliminate_m( const sg_matrix src, sg_matrix des ) {
 	int i, j, k, n = src->row;
   double ratio;
      
@@ -852,7 +852,7 @@ void eliminate_m( const matrix_t src, matrix_t des ) {
   for( i=0 ; i < n-1 ; ++i ) {
     for( j=i+1 ; j < n ; ++j ) {
       // if divider is 0, jump over the row
-      if ( src->data[ i ][ i ] != 0.0 ) {
+      if ( src->data[ i ][ i ] != SG_DEFAULT_VALUE ) {
 	ratio = src->data[ j ][ i ] / src->data[ i ][ i ] ;
 	
 	for( k=i ; k < n ; ++k )
@@ -865,7 +865,7 @@ void eliminate_m( const matrix_t src, matrix_t des ) {
   for( i=0 ; i < n ; ++i ) {		
     for( j=0 ; j < n ; ++j ) {
       // if divider is 0, jump over the row
-      if ( des->data[ i ][ j ] != 0.0 ) {
+      if ( des->data[ i ][ j ] != SG_DEFAULT_VALUE ) {
 	ratio = des->data[ i ][ j ];
 	
 	for( k=0 ; k < n ; ++k )
@@ -882,9 +882,9 @@ void eliminate_m( const matrix_t src, matrix_t des ) {
 }
 
 // function that find the minor of a matrix
-matrix_t minors( matrix_t src , size_t row , size_t col ) {
+sg_matrix minors( sg_matrix src , size_t row , size_t col ) {
   size_t i, j, a = 0, b = 0;
-  matrix_t n_mat;
+  sg_matrix n_mat;
 
   if( !is_valid_m( src ) ) {
     SENGI_ERR( INVALID_MAT );
@@ -897,7 +897,7 @@ matrix_t minors( matrix_t src , size_t row , size_t col ) {
     if( i != row ) {
       for( j = 0 ; j < src->col ; ++j ) {
 	if (j != col) {
-	  n_mat->data[ a ][ b ] = src->data[ i ][ j ];
+	  n_mat.data[ a ][ b ] = src->data[ i ][ j ];
 	  ++b;	
 	}
       }
@@ -909,13 +909,13 @@ matrix_t minors( matrix_t src , size_t row , size_t col ) {
 }
 
 // function that calculate the determinant
-double det( matrix_t src ) {
+double det( sg_matrix src ) {
   size_t i, j;
-  double retval = 0.0;
+  double retval = SG_DEFAULT_VALUE;
     
   if( src->row != src->col ) {
     SENGI_ERR( SQUARE_MATRIX );
-    return -1;
+    return SG_INVALID_VALUE;
   }
 
   if( 1 == src->row )
@@ -933,7 +933,7 @@ double det( matrix_t src ) {
 	    );
   }
   else {
-    retval = 0.0 ;
+    retval = SG_DEFAULT_VALUE;
 
     for ( i=0 ;  ;  ) {
       for( j=0 ; j < src->col ; ++j ) {
@@ -947,29 +947,29 @@ double det( matrix_t src ) {
 }
 
 // function that scales the vector with val
-void scale_v( vector_t vec, const double val ) {
+void scale_v( sg_vector vec, const double val ) {
   size_t i;
   
   if( !is_valid_v( vec ) )
     SENGI_ERR( INVALID_VEC );
   else {
-    for( i=0 ; i < vec->size ; ++i )
-      vec->data[ i ] = val * vec->data[ i ];
+    for( i=0 ; i < vec.size ; ++i )
+      vec.data[ i ] = val * vec.data[ i ];
   }
 
   return;
 }
 
 // function that scales the matrix with val
-void scale_m( matrix_t mat, const double val ) {
+void scale_m( sg_matrix mat, const double val ) {
   size_t i, j;
   
   if( !is_valid_m( mat ) )
     SENGI_ERR( INVALID_MAT );
   else {
-    for( i=0 ; i < mat->row ; ++i ) {
-      for( j=0 ; j < mat->col ; ++j )
-	mat->data[ i ][ j ] = val * mat->data[ i ][ j ];
+    for( i=0 ; i < mat.row ; ++i ) {
+      for( j=0 ; j < mat.col ; ++j )
+	mat.data[ i ][ j ] = val * mat.data[ i ][ j ];
     }
   }
 
@@ -977,34 +977,34 @@ void scale_m( matrix_t mat, const double val ) {
 }
 
 // function that prints the vector
-void print_v( const vector_t vec ) {
+void print_v( const sg_vector vec ) {
   size_t i;
 
   if( !is_valid_v( vec ) )
     SENGI_ERR( INVALID_VEC );
-  else if( RVEC == vec->type ) {
-    for( i=0 ; i < vec->size ; ++i )
-      fprintf( stdout, "%f ", vec->data[ i ] ); 
+  else if( RVEC == vec.type ) {
+    for( i=0 ; i < vec.size ; ++i )
+      fprintf( stdout, "%f ", vec.data[ i ] ); 
     fprintf( stdout, "%s", "\n" );
   }
   else {
-    for( i=0 ; i < vec->size ; ++i )
-      fprintf( stdout, "%f\n", vec->data[ i ] );
+    for( i=0 ; i < vec.size ; ++i )
+      fprintf( stdout, "%f\n", vec.data[ i ] );
   }
 
   return;
 }
 
 // function that prints the matrix
-void print_m( const matrix_t mat ) {
+void print_m( const sg_matrix mat ) {
   size_t i, j;
 
   if( !is_valid_m( mat ) )
     SENGI_ERR( INVALID_MAT );
   else {
-    for( i=0 ; i < mat->row ; ++i ) {
-      for( j=0 ; j < mat->col ; ++j )
-				fprintf( stdout, "%f ", mat->data[ i ][ j ] );
+    for( i=0 ; i < mat.row ; ++i ) {
+      for( j=0 ; j < mat.col ; ++j )
+				fprintf( stdout, "%f ", mat.data[ i ][ j ] );
       fprintf( stdout, "%s", "\n" );
     }
 
@@ -1015,29 +1015,31 @@ void print_m( const matrix_t mat ) {
 }
 
 // function that checks whether the vector is valid
-bool_t is_valid_v( const vector_t vec ) {
-  if( NULL == vec )
-    return FALSE;
-  else if( vec->size < 1 )
-    return FALSE;
-  else if( NULL == vec->data )
-    return FALSE;
-  else if( !(RVEC == vec->type || CVEC == vec->type) )
-    return FALSE;
-  else
-    return TRUE;
+sg_bool is_valid_v( const sg_vector vec ) {
+  if( vec.size < 1 ) {
+    return SG_FALSE;
+  }
+
+  if( NULL == vec.data ) {
+    return SG_FALSE;
+  }
+
+  if( !(RVEC == vec.type || CVEC == vec.type) ) {
+    return SG_FALSE;
+  }
+  
+  return SG_TRUE;
 }
 
 // function that checks whether the matrix is valid
-bool_t is_valid_m( const matrix_t mat ) {
-  if( NULL == mat )
-    return FALSE;
-  else if( mat->row < 2 || mat->col < 2 )
-    return FALSE;
-  else if( NULL == mat->data )
-    return FALSE;
-  else if( NULL == mat->data[ 0 ] )
-    return FALSE;
-  else
-    return TRUE;
+sg_bool is_valid_m( const sg_matrix mat ) {
+  if( mat.row < 2 || mat.col < 2 ) {
+    return SG_FALSE;
+  }
+
+  if( NULL == mat.data ) {
+    return SG_FALSE;
+  }
+
+  return SG_TRUE;
 }
