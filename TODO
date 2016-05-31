@@ -1,4 +1,6 @@
+- the examples will be edited as to changes excepted base_test
 - determinant
 - utility headers
+
 ! put functions can not work in Mac OS X because segmentation fault occurs.
 ! do not use size_t counter in any loop which counts down because of counter overflow
