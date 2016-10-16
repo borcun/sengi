@@ -249,7 +249,6 @@ void print_v( const sg_vector vec );
 /// @return -
 void print_m( const sg_matrix m );
 
-
 /// \brief function that find minors
 ///@param src - matrix , row , col index
 ///@return - minors of that matrix
