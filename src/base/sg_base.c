@@ -1,3 +1,9 @@
+/**
+ * @defgroup SG_BASE base sengi modules
+ * @defgroup SG_ERROR sengi error modules
+ *
+ */
+
 #include "sg_base.h"
 
 // function that create a row vector
@@ -291,15 +297,15 @@ sg_bool diagonal_m( sg_matrix mat, sg_vector vec ) {
   int i;
   
   if( !is_valid_m( mat ) ) {
-    SENGI_ERR( "the matrix is invalid" );
+    SENGI_ERR(  INVALID_MAT );
     return SG_FALSE;
   }
   else if( !is_valid_v( vec ) ) {
-    SENGI_ERR( "the vector is invalid" );
+    SENGI_ERR( INVALID_VEC );
     return SG_FALSE;
   }
   else if( mat.col != vec.size ) {
-    SENGI_ERR( "the matrix and vector sizes do not match" );
+    SENGI_ERR( MATCH_COL_SIZE );
     return SG_FALSE;
   }
   else if( mat.col > mat.row ) {
@@ -309,6 +315,32 @@ sg_bool diagonal_m( sg_matrix mat, sg_vector vec ) {
   else {
     for( i=0 ; i < mat.row ; ++i ) {
       vec.data[ i ] = mat.data[ i ][ i ];
+    }
+    
+    return SG_TRUE;
+  }
+}
+
+// function that gets sum of diagonal elements
+sg_bool trace_m( sg_matrix mat, double *t ) {
+  int i = 0;
+  
+  if( NULL == t ) {
+    SENGI_ERR( "The trace value is NULL" );
+    return SG_FALSE;
+  }
+  else if( !is_valid_m( mat ) ) {
+    SENGI_ERR( INVALID_MAT );
+    return SG_FALSE;
+  }
+  else if( mat.row != mat.col ) {
+    SENGI_ERR( SQUARE_MATRIX );
+  }
+  else {
+    *t = 0.0;
+    
+    for( i = 0 ; i < mat.row ; ++i ) {
+      *t += mat.data[ i ][ i ];
     }
     
     return SG_TRUE;

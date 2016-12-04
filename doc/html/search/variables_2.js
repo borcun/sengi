@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['row',['row',['../structmatrix__t.html#a97ab3b8ef2f074e3774c66099d7ec59b',1,'matrix_t']]]
+  ['row',['row',['../structsg__matrix.html#a815d3621cbdce7489fbf453286515aa7',1,'sg_matrix']]]
 ];

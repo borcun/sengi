@@ -1,0 +1,119 @@
+\hypertarget{sg__util_8h}{}\section{/home/boo/\+G\+I\+T\+\_\+\+R\+E\+P\+O/sengi/src/inc/sg\+\_\+util.h File Reference}
+\label{sg__util_8h}\index{/home/boo/\+G\+I\+T\+\_\+\+R\+E\+P\+O/sengi/src/inc/sg\+\_\+util.\+h@{/home/boo/\+G\+I\+T\+\_\+\+R\+E\+P\+O/sengi/src/inc/sg\+\_\+util.\+h}}
+
+
+sengi library utility header  
+
+
+{\ttfamily \#include \char`\"{}sg\+\_\+base.\+h\char`\"{}}\newline
+Include dependency graph for sg\+\_\+util.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sg__util_8h__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structsg__vector}{sg\+\_\+vector} \hyperlink{sg__util_8h_a100c3b2e1625efaeda88e31dea9b714a}{read\+\_\+v} (const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em function that reads a vector from file \end{DoxyCompactList}\item 
+\hyperlink{structsg__matrix}{sg\+\_\+matrix} \hyperlink{sg__util_8h_a53e6c63e45ec3863fc316650bb0b1c5d}{read\+\_\+m} (const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em function that reads a matrix from file \end{DoxyCompactList}\item 
+void \hyperlink{sg__util_8h_afdfe181d6d2408f4128a13a80a977724}{write\+\_\+v} (const char $\ast$path, const \hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that writes a vector into file \end{DoxyCompactList}\item 
+void \hyperlink{sg__util_8h_a5656093a626c6b817aa95607cc2afe3a}{write\+\_\+m} (const char $\ast$path, const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat)
+\begin{DoxyCompactList}\small\item\em function that writes a matrix into file \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+sengi library utility header 
+
+\begin{DoxyAuthor}{Author}
+boo 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+May 28, 2015 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+free software 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\hypertarget{sg__util_8h_a53e6c63e45ec3863fc316650bb0b1c5d}{}\label{sg__util_8h_a53e6c63e45ec3863fc316650bb0b1c5d} 
+\index{sg\+\_\+util.\+h@{sg\+\_\+util.\+h}!read\+\_\+m@{read\+\_\+m}}
+\index{read\+\_\+m@{read\+\_\+m}!sg\+\_\+util.\+h@{sg\+\_\+util.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+m()}{read\_m()}}
+{\footnotesize\ttfamily \hyperlink{structsg__matrix}{sg\+\_\+matrix} read\+\_\+m (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+function that reads a matrix from file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & -\/ file path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+matrix or N\+U\+LL 
+\end{DoxyReturn}
+\hypertarget{sg__util_8h_a100c3b2e1625efaeda88e31dea9b714a}{}\label{sg__util_8h_a100c3b2e1625efaeda88e31dea9b714a} 
+\index{sg\+\_\+util.\+h@{sg\+\_\+util.\+h}!read\+\_\+v@{read\+\_\+v}}
+\index{read\+\_\+v@{read\+\_\+v}!sg\+\_\+util.\+h@{sg\+\_\+util.\+h}}
+\subsubsection{\texorpdfstring{read\+\_\+v()}{read\_v()}}
+{\footnotesize\ttfamily \hyperlink{structsg__vector}{sg\+\_\+vector} read\+\_\+v (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+function that reads a vector from file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & -\/ file path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector or N\+U\+LL 
+\end{DoxyReturn}
+\hypertarget{sg__util_8h_a5656093a626c6b817aa95607cc2afe3a}{}\label{sg__util_8h_a5656093a626c6b817aa95607cc2afe3a} 
+\index{sg\+\_\+util.\+h@{sg\+\_\+util.\+h}!write\+\_\+m@{write\+\_\+m}}
+\index{write\+\_\+m@{write\+\_\+m}!sg\+\_\+util.\+h@{sg\+\_\+util.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+m()}{write\_m()}}
+{\footnotesize\ttfamily void write\+\_\+m (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat }\end{DoxyParamCaption})}
+
+
+
+function that writes a matrix into file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & -\/ file path \\
+\hline
+{\em mat} & -\/ matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__util_8h_afdfe181d6d2408f4128a13a80a977724}{}\label{sg__util_8h_afdfe181d6d2408f4128a13a80a977724} 
+\index{sg\+\_\+util.\+h@{sg\+\_\+util.\+h}!write\+\_\+v@{write\+\_\+v}}
+\index{write\+\_\+v@{write\+\_\+v}!sg\+\_\+util.\+h@{sg\+\_\+util.\+h}}
+\subsubsection{\texorpdfstring{write\+\_\+v()}{write\_v()}}
+{\footnotesize\ttfamily void write\+\_\+v (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path,  }\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that writes a vector into file 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & -\/ file path \\
+\hline
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}

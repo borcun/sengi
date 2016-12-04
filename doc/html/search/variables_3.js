@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['size',['size',['../structvector__t.html#a854352f53b148adc24983a58a1866d66',1,'vector_t']]]
+  ['size',['size',['../structsg__vector.html#a13a2c56640c90c5794398e80ad8d3968',1,'sg_vector']]]
 ];

@@ -12,37 +12,53 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SG_DEFAULT_VALUE 0.0
-#define SG_INVALID_VALUE -1
+//! sengi default value
+#define SG_DEFAULT_VALUE ( 0.0f )
 
-//! boolean enumeration
+//! sengi invalid value
+#define SG_INVALID_VALUE ( -1 )
+
+/// \brief enum sg_bool, boolean enumeration
 typedef enum {
-  SG_FALSE, /**< false type */
-  SG_TRUE   /**< true type */
+  //! sengi false type
+  SG_FALSE,
+
+  //! sengi true type
+  SG_TRUE
+  
 } sg_bool;
 
-//! row or column vector enumeration
+/// \brief enum sg_vector_t, row or column vector enumeration
 typedef enum {
-  SG_INVVEC, /**< invalid vector type */
-  SG_RVEC,   /**< row vector */
-  SG_CVEC    /**< column vector */
+  //! invalid vector type
+  SG_INVVEC, 
+
+  //! row vector
+  SG_RVEC,
+
+  //! column vector
+  SG_CVEC
+  
 } sg_vector_t;
 
-//! vector data structure
+/// \brief struct sg_vector, vector data structure
 struct sg_vector {
   size_t size;      /**< vector element size */
   sg_vector_t type; /**< vector type such as row or column */
   double *data;     /**< vector data array */
 };
 
-//! matrix data structure
+/// \brief struct sg_matrix, matrix data structure
 struct sg_matrix {
   size_t row;     /**< matrix row size */
   size_t col;     /**< matrix column size */
   double **data;  /**< matrix data array */
 };
 
+//! typedef for struct sg_vector 
 typedef struct sg_vector sg_vector;
+
+//! typedef for struct sg_matrix
 typedef struct sg_matrix sg_matrix;
 
 #endif

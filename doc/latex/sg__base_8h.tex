@@ -1,0 +1,1012 @@
+\hypertarget{sg__base_8h}{}\section{/home/boo/\+G\+I\+T\+\_\+\+R\+E\+P\+O/sengi/src/inc/sg\+\_\+base.h File Reference}
+\label{sg__base_8h}\index{/home/boo/\+G\+I\+T\+\_\+\+R\+E\+P\+O/sengi/src/inc/sg\+\_\+base.\+h@{/home/boo/\+G\+I\+T\+\_\+\+R\+E\+P\+O/sengi/src/inc/sg\+\_\+base.\+h}}
+
+
+sengi library basic functions  
+
+
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}sg\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sg\+\_\+error.\+h\char`\"{}}\newline
+Include dependency graph for sg\+\_\+base.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sg__base_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{sg__base_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structsg__vector}{sg\+\_\+vector} \hyperlink{sg__base_8h_a662fee5b3306b4f790e732d079984aae}{create\+\_\+rv} (const size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em function that creates a row vector \end{DoxyCompactList}\item 
+\hyperlink{structsg__vector}{sg\+\_\+vector} \hyperlink{sg__base_8h_ad8e9c470da3a521323e22d51fd2c8e90}{create\+\_\+cv} (const size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em function that creates a column vector \end{DoxyCompactList}\item 
+\hyperlink{structsg__matrix}{sg\+\_\+matrix} \hyperlink{sg__base_8h_a70a1aa8fe73916c2eee475afa3bffe02}{create\+\_\+m} (const size\+\_\+t row, const size\+\_\+t col)
+\begin{DoxyCompactList}\small\item\em funtion that creates a matrix \end{DoxyCompactList}\item 
+\hyperlink{structsg__matrix}{sg\+\_\+matrix} \hyperlink{sg__base_8h_a127ce50ecba2cd487a54a5774930acef}{create\+\_\+im} (const size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em function that creates identity matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_afc6a7d1674e0f1d455978f0614a714e2}{release\+\_\+v} (\hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that releases vector \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a1103516c4614ef78fbdb566e74550cf9}{release\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat)
+\begin{DoxyCompactList}\small\item\em function that releases matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a4a5c3f2cfea969b9d0aebf99dcf28b6f}{put\+\_\+v} (\hyperlink{structsg__vector}{sg\+\_\+vector} vec, const size\+\_\+t index, const double val)
+\begin{DoxyCompactList}\small\item\em function that puts the value into the vector \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_abb9477581543b0b1ab44c0d5e7ac5476}{put\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, const size\+\_\+t row, const size\+\_\+t col, const double val)
+\begin{DoxyCompactList}\small\item\em function that puts the value into the matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a9499285f12abf87e3b955be08f7fb59b}{fill\+\_\+v} (\hyperlink{structsg__vector}{sg\+\_\+vector} vec, const double val)
+\begin{DoxyCompactList}\small\item\em function that fills vector with value \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a736693c7446d051c2326a7e7b518c861}{fill\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, const double val)
+\begin{DoxyCompactList}\small\item\em function that fills matrix with value \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_afa4e4395026b0f1f5496e1e500f46b14}{copy\+\_\+v} (const \hyperlink{structsg__vector}{sg\+\_\+vector} src, \hyperlink{structsg__vector}{sg\+\_\+vector} des)
+\begin{DoxyCompactList}\small\item\em function that copies source vector to destination vector \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a9f2e8fb5e4d0fe20ea85783ca3bda532}{copy\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} src, \hyperlink{structsg__matrix}{sg\+\_\+matrix} des)
+\begin{DoxyCompactList}\small\item\em function that copies source matrix to destination matrix \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{sg__base_8h_abe30c86d36c343438bf34f24d80eb924}{norm\+\_\+v} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that finds norm of vector \end{DoxyCompactList}\item 
+size\+\_\+t \hyperlink{sg__base_8h_aee2a61ec029d4d419a0838d5d4786700}{norm\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat)
+\begin{DoxyCompactList}\small\item\em function that finds norm of matrix \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_ae82a1360691552658e73548165e41e4b}{diagonal\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, \hyperlink{structsg__vector}{sg\+\_\+vector} diag)
+\begin{DoxyCompactList}\small\item\em function that gets diagonal of matrix \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_a6ecd0e7e8ce6c97cef3cdf8c68952f73}{trace\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, double $\ast$t)
+\begin{DoxyCompactList}\small\item\em function that gets sum of diagonal elements of square matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_ac013d2b0a62ffd56c32414339c124e78}{extend\+\_\+mv} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, const \hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that extends matrix with the vector according to vector type \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_ad965ccedb23092254f5e82dc2067e644}{extend\+\_\+mm} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} aug, const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat)
+\begin{DoxyCompactList}\small\item\em function that extends matrix with the matrix \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_aec321ab4e3472d8267e42652725bb94f}{to\+\_\+v} (\hyperlink{structsg__vector}{sg\+\_\+vector} vec, double $\ast$data)
+\begin{DoxyCompactList}\small\item\em function that converts data array to vector \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_ae828bc6b7acac7b9c6f0db4084340717}{to\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, double $\ast$$\ast$data)
+\begin{DoxyCompactList}\small\item\em function that converts data array to matrix \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_a29bf4c0af80fae05c04089e36bb58e10}{get\+\_\+row\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, const size\+\_\+t row, \hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that gets row of matrix which is indicated by row index \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_aff11128782a728d24a6b8e8ef11e66b0}{get\+\_\+col\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, const size\+\_\+t col, \hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that gets column of matrix which is indicated by col index \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_ae778afe493df09153fd78225a8827c65}{replace\+\_\+rows\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, int row1, int row2)
+\begin{DoxyCompactList}\small\item\em function that replaces rows of matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a5d8677e976deec73676f0be869022e0e}{add\+\_\+mm} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat1, const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat2, \hyperlink{structsg__matrix}{sg\+\_\+matrix} res)
+\begin{DoxyCompactList}\small\item\em function that adds two matrices \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a57d12d6b8bcebb119850868e15bace35}{sub\+\_\+mm} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat1, const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat2, \hyperlink{structsg__matrix}{sg\+\_\+matrix} res)
+\begin{DoxyCompactList}\small\item\em function that subtracts two matrices \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a63d73b9984fff7774179d21d2809738a}{mult\+\_\+mm} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat1, const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat2, \hyperlink{structsg__matrix}{sg\+\_\+matrix} res)
+\begin{DoxyCompactList}\small\item\em function that multiplies two matrices \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a73a89845cedb246c73320ba0c37645d6}{mult\+\_\+mv} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, const \hyperlink{structsg__vector}{sg\+\_\+vector} vec, \hyperlink{structsg__vector}{sg\+\_\+vector} res)
+\begin{DoxyCompactList}\small\item\em function that multiplies matrix and vector \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a43ecca236b23b815163f59d9a4633880}{mult\+\_\+vm} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec, const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, \hyperlink{structsg__vector}{sg\+\_\+vector} res)
+\begin{DoxyCompactList}\small\item\em function that multiplies vector and matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_ae8fa4243f5a0a90a5494bd7ec47049c3}{add\+\_\+vv} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec1, const \hyperlink{structsg__vector}{sg\+\_\+vector} vec2, \hyperlink{structsg__vector}{sg\+\_\+vector} res)
+\begin{DoxyCompactList}\small\item\em function that adds two vectors \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a0c1ab3a32cc38d60128d15dcd912e18e}{sub\+\_\+vv} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec1, const \hyperlink{structsg__vector}{sg\+\_\+vector} vec2, \hyperlink{structsg__vector}{sg\+\_\+vector} res)
+\begin{DoxyCompactList}\small\item\em function that subtracts two vectors \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a06af58da596e8b01f27f0c1127b5d3aa}{dot\+\_\+product\+\_\+vv} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec1, const \hyperlink{structsg__vector}{sg\+\_\+vector} vec2, double $\ast$res)
+\begin{DoxyCompactList}\small\item\em function that performs dot product of two vectors \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a4bc07f7500d2d5f861abc50fb32593b5}{cross\+\_\+product\+\_\+vv} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec1, const \hyperlink{structsg__vector}{sg\+\_\+vector} vec2, \hyperlink{structsg__vector}{sg\+\_\+vector} res)
+\begin{DoxyCompactList}\small\item\em function that performs cross product of two vectors \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_ab8b057de5e66761ab06e4877507824e3}{transpose\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} src, \hyperlink{structsg__matrix}{sg\+\_\+matrix} des)
+\begin{DoxyCompactList}\small\item\em function that transposes the source matrix and copies it to destination matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a4ab46ae41efb33a55fa686cb8fe598cf}{inverse\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} src, \hyperlink{structsg__matrix}{sg\+\_\+matrix} des)
+\begin{DoxyCompactList}\small\item\em function that finds inverse of matrix \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a423194d52ac94d282d92d8343565b12e}{eliminate\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} src, \hyperlink{structsg__matrix}{sg\+\_\+matrix} des)
+\begin{DoxyCompactList}\small\item\em function that eliminate matrix via Gauss method \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a0e0e0944fa847628a9edbaa800d7c2dc}{scale\+\_\+v} (\hyperlink{structsg__vector}{sg\+\_\+vector} vec, const double val)
+\begin{DoxyCompactList}\small\item\em function that scales vector with a number \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a5944bcd308ec1166dba9f72d2993f7e0}{scale\+\_\+m} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} mat, const double val)
+\begin{DoxyCompactList}\small\item\em function that scales matrix with a number \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a9bf1bbe0990092bf7718d8b424200451}{print\+\_\+v} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that prints vector \end{DoxyCompactList}\item 
+void \hyperlink{sg__base_8h_a3b3f7dfc24dde1d25e9d86a56d411dee}{print\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat)
+\begin{DoxyCompactList}\small\item\em function that prints matrix \end{DoxyCompactList}\item 
+\hyperlink{structsg__matrix}{sg\+\_\+matrix} \hyperlink{sg__base_8h_a27b05aa346f584407139a4174d6317e4}{minors} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} src, size\+\_\+t row, size\+\_\+t col)
+\begin{DoxyCompactList}\small\item\em function that find minors \end{DoxyCompactList}\item 
+double \hyperlink{sg__base_8h_a62bdbd976ca988088f25d2ebad39f596}{det} (\hyperlink{structsg__matrix}{sg\+\_\+matrix} src)
+\begin{DoxyCompactList}\small\item\em fucntion that find the detarminant \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_a30c67ba4e32705dc873ffbad20b6967f}{is\+\_\+valid\+\_\+v} (const \hyperlink{structsg__vector}{sg\+\_\+vector} vec)
+\begin{DoxyCompactList}\small\item\em function that checks whether the vector is valid \end{DoxyCompactList}\item 
+\hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} \hyperlink{sg__base_8h_afd1e7630a963bdc7349250739810dffb}{is\+\_\+valid\+\_\+m} (const \hyperlink{structsg__matrix}{sg\+\_\+matrix} mat)
+\begin{DoxyCompactList}\small\item\em function that checks whether the matrix is valid \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+sengi library basic functions 
+
+\begin{DoxyDate}{Date}
+April 23, 2015 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+boo 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+free software 
+\end{DoxyCopyright}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000001}{Todo}]compherensive test functions for whole S\+E\+N\+GI library \end{DoxyRefDesc}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000001}{Bug}]\end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\hypertarget{sg__base_8h_a5d8677e976deec73676f0be869022e0e}{}\label{sg__base_8h_a5d8677e976deec73676f0be869022e0e} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!add\+\_\+mm@{add\+\_\+mm}}
+\index{add\+\_\+mm@{add\+\_\+mm}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{add\+\_\+mm()}{add\_mm()}}
+{\footnotesize\ttfamily void add\+\_\+mm (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat1,  }\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat2,  }\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that adds two matrices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat1} & -\/ first matrix \\
+\hline
+{\em mat2} & -\/ second matrix \\
+\hline
+{\em res} & -\/ result matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ae8fa4243f5a0a90a5494bd7ec47049c3}{}\label{sg__base_8h_ae8fa4243f5a0a90a5494bd7ec47049c3} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!add\+\_\+vv@{add\+\_\+vv}}
+\index{add\+\_\+vv@{add\+\_\+vv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{add\+\_\+vv()}{add\_vv()}}
+{\footnotesize\ttfamily void add\+\_\+vv (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec1,  }\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec2,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that adds two vectors 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec1} & -\/ first vector \\
+\hline
+{\em vec2} & -\/ second vector \\
+\hline
+{\em res} & -\/ result vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a9f2e8fb5e4d0fe20ea85783ca3bda532}{}\label{sg__base_8h_a9f2e8fb5e4d0fe20ea85783ca3bda532} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!copy\+\_\+m@{copy\+\_\+m}}
+\index{copy\+\_\+m@{copy\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{copy\+\_\+m()}{copy\_m()}}
+{\footnotesize\ttfamily void copy\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{src,  }\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{des }\end{DoxyParamCaption})}
+
+
+
+function that copies source matrix to destination matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & -\/ source matrix \\
+\hline
+{\em des} & -\/ destination matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_afa4e4395026b0f1f5496e1e500f46b14}{}\label{sg__base_8h_afa4e4395026b0f1f5496e1e500f46b14} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!copy\+\_\+v@{copy\+\_\+v}}
+\index{copy\+\_\+v@{copy\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{copy\+\_\+v()}{copy\_v()}}
+{\footnotesize\ttfamily void copy\+\_\+v (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{src,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{des }\end{DoxyParamCaption})}
+
+
+
+function that copies source vector to destination vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & -\/ source vector \\
+\hline
+{\em des} & -\/ destination vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ad8e9c470da3a521323e22d51fd2c8e90}{}\label{sg__base_8h_ad8e9c470da3a521323e22d51fd2c8e90} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!create\+\_\+cv@{create\+\_\+cv}}
+\index{create\+\_\+cv@{create\+\_\+cv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+cv()}{create\_cv()}}
+{\footnotesize\ttfamily \hyperlink{structsg__vector}{sg\+\_\+vector} create\+\_\+cv (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+function that creates a column vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & -\/ column vector size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if vector is created, return the vector. Otherwise, return N\+U\+LL. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a127ce50ecba2cd487a54a5774930acef}{}\label{sg__base_8h_a127ce50ecba2cd487a54a5774930acef} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!create\+\_\+im@{create\+\_\+im}}
+\index{create\+\_\+im@{create\+\_\+im}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+im()}{create\_im()}}
+{\footnotesize\ttfamily \hyperlink{structsg__matrix}{sg\+\_\+matrix} create\+\_\+im (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+function that creates identity matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & -\/ matrix size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if matrix is created, return the matrix. Otherwise, return N\+U\+LL. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a70a1aa8fe73916c2eee475afa3bffe02}{}\label{sg__base_8h_a70a1aa8fe73916c2eee475afa3bffe02} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!create\+\_\+m@{create\+\_\+m}}
+\index{create\+\_\+m@{create\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+m()}{create\_m()}}
+{\footnotesize\ttfamily \hyperlink{structsg__matrix}{sg\+\_\+matrix} create\+\_\+m (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{row,  }\item[{const size\+\_\+t}]{col }\end{DoxyParamCaption})}
+
+
+
+funtion that creates a matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & -\/ matrix row size \\
+\hline
+{\em col} & -\/ matrix column size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if matrix is created, return the matrix. Otherwise, return N\+U\+LL. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a662fee5b3306b4f790e732d079984aae}{}\label{sg__base_8h_a662fee5b3306b4f790e732d079984aae} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!create\+\_\+rv@{create\+\_\+rv}}
+\index{create\+\_\+rv@{create\+\_\+rv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{create\+\_\+rv()}{create\_rv()}}
+{\footnotesize\ttfamily \hyperlink{structsg__vector}{sg\+\_\+vector} create\+\_\+rv (\begin{DoxyParamCaption}\item[{const size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+function that creates a row vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & -\/ row vector size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if vector is created, return the vector. Otherwise, return N\+U\+LL. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a4bc07f7500d2d5f861abc50fb32593b5}{}\label{sg__base_8h_a4bc07f7500d2d5f861abc50fb32593b5} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!cross\+\_\+product\+\_\+vv@{cross\+\_\+product\+\_\+vv}}
+\index{cross\+\_\+product\+\_\+vv@{cross\+\_\+product\+\_\+vv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{cross\+\_\+product\+\_\+vv()}{cross\_product\_vv()}}
+{\footnotesize\ttfamily void cross\+\_\+product\+\_\+vv (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec1,  }\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec2,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that performs cross product of two vectors 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec1} & -\/ first vector \\
+\hline
+{\em vec2} & -\/ second vector \\
+\hline
+{\em res} & -\/ result vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a62bdbd976ca988088f25d2ebad39f596}{}\label{sg__base_8h_a62bdbd976ca988088f25d2ebad39f596} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!det@{det}}
+\index{det@{det}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{det()}{det()}}
+{\footnotesize\ttfamily double det (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{src }\end{DoxyParamCaption})}
+
+
+
+fucntion that find the detarminant 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & -\/ matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+deteminant of matrix 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ae82a1360691552658e73548165e41e4b}{}\label{sg__base_8h_ae82a1360691552658e73548165e41e4b} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!diagonal\+\_\+m@{diagonal\+\_\+m}}
+\index{diagonal\+\_\+m@{diagonal\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{diagonal\+\_\+m()}{diagonal\_m()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} diagonal\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{diag }\end{DoxyParamCaption})}
+
+
+
+function that gets diagonal of matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em diag} & -\/ diagonal vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the matrix is suitable for finding diagonal, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a06af58da596e8b01f27f0c1127b5d3aa}{}\label{sg__base_8h_a06af58da596e8b01f27f0c1127b5d3aa} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!dot\+\_\+product\+\_\+vv@{dot\+\_\+product\+\_\+vv}}
+\index{dot\+\_\+product\+\_\+vv@{dot\+\_\+product\+\_\+vv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{dot\+\_\+product\+\_\+vv()}{dot\_product\_vv()}}
+{\footnotesize\ttfamily void dot\+\_\+product\+\_\+vv (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec1,  }\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec2,  }\item[{double $\ast$}]{res }\end{DoxyParamCaption})}
+
+
+
+function that performs dot product of two vectors 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec1} & -\/ first vector \\
+\hline
+{\em vec2} & -\/ second vector \\
+\hline
+{\em res} & -\/ result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a423194d52ac94d282d92d8343565b12e}{}\label{sg__base_8h_a423194d52ac94d282d92d8343565b12e} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!eliminate\+\_\+m@{eliminate\+\_\+m}}
+\index{eliminate\+\_\+m@{eliminate\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{eliminate\+\_\+m()}{eliminate\_m()}}
+{\footnotesize\ttfamily void eliminate\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{src,  }\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{des }\end{DoxyParamCaption})}
+
+
+
+function that eliminate matrix via Gauss method 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & -\/ source matrix \\
+\hline
+{\em des} & -\/ destination matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ad965ccedb23092254f5e82dc2067e644}{}\label{sg__base_8h_ad965ccedb23092254f5e82dc2067e644} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!extend\+\_\+mm@{extend\+\_\+mm}}
+\index{extend\+\_\+mm@{extend\+\_\+mm}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{extend\+\_\+mm()}{extend\_mm()}}
+{\footnotesize\ttfamily void extend\+\_\+mm (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{aug,  }\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat }\end{DoxyParamCaption})}
+
+
+
+function that extends matrix with the matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aug} & -\/ augmented matrix \\
+\hline
+{\em mat} & -\/ matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ac013d2b0a62ffd56c32414339c124e78}{}\label{sg__base_8h_ac013d2b0a62ffd56c32414339c124e78} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!extend\+\_\+mv@{extend\+\_\+mv}}
+\index{extend\+\_\+mv@{extend\+\_\+mv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{extend\+\_\+mv()}{extend\_mv()}}
+{\footnotesize\ttfamily void extend\+\_\+mv (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that extends matrix with the vector according to vector type 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a736693c7446d051c2326a7e7b518c861}{}\label{sg__base_8h_a736693c7446d051c2326a7e7b518c861} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!fill\+\_\+m@{fill\+\_\+m}}
+\index{fill\+\_\+m@{fill\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{fill\+\_\+m()}{fill\_m()}}
+{\footnotesize\ttfamily void fill\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{const double}]{val }\end{DoxyParamCaption})}
+
+
+
+function that fills matrix with value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em val} & -\/ value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a9499285f12abf87e3b955be08f7fb59b}{}\label{sg__base_8h_a9499285f12abf87e3b955be08f7fb59b} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!fill\+\_\+v@{fill\+\_\+v}}
+\index{fill\+\_\+v@{fill\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{fill\+\_\+v()}{fill\_v()}}
+{\footnotesize\ttfamily void fill\+\_\+v (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec,  }\item[{const double}]{val }\end{DoxyParamCaption})}
+
+
+
+function that fills vector with value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+{\em val} & -\/ value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_aff11128782a728d24a6b8e8ef11e66b0}{}\label{sg__base_8h_aff11128782a728d24a6b8e8ef11e66b0} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!get\+\_\+col\+\_\+m@{get\+\_\+col\+\_\+m}}
+\index{get\+\_\+col\+\_\+m@{get\+\_\+col\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+col\+\_\+m()}{get\_col\_m()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} get\+\_\+col\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{const size\+\_\+t}]{col,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that gets column of matrix which is indicated by col index 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em col} & -\/ matrix column index \\
+\hline
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if operation is success, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a29bf4c0af80fae05c04089e36bb58e10}{}\label{sg__base_8h_a29bf4c0af80fae05c04089e36bb58e10} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!get\+\_\+row\+\_\+m@{get\+\_\+row\+\_\+m}}
+\index{get\+\_\+row\+\_\+m@{get\+\_\+row\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{get\+\_\+row\+\_\+m()}{get\_row\_m()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} get\+\_\+row\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{const size\+\_\+t}]{row,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that gets row of matrix which is indicated by row index 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em row} & -\/ matrix row index \\
+\hline
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if operation is success, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a4ab46ae41efb33a55fa686cb8fe598cf}{}\label{sg__base_8h_a4ab46ae41efb33a55fa686cb8fe598cf} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!inverse\+\_\+m@{inverse\+\_\+m}}
+\index{inverse\+\_\+m@{inverse\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{inverse\+\_\+m()}{inverse\_m()}}
+{\footnotesize\ttfamily void inverse\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{src,  }\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{des }\end{DoxyParamCaption})}
+
+
+
+function that finds inverse of matrix 
+
+\begin{DoxyNote}{Note}
+the inverse method is Gauss-\/\+Jordan elimination 
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em src} & -\/ source matrix \\
+\hline
+{\em des} & -\/ destination matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_afd1e7630a963bdc7349250739810dffb}{}\label{sg__base_8h_afd1e7630a963bdc7349250739810dffb} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!is\+\_\+valid\+\_\+m@{is\+\_\+valid\+\_\+m}}
+\index{is\+\_\+valid\+\_\+m@{is\+\_\+valid\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{is\+\_\+valid\+\_\+m()}{is\_valid\_m()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} is\+\_\+valid\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat }\end{DoxyParamCaption})}
+
+
+
+function that checks whether the matrix is valid 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the matrix is valid, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a30c67ba4e32705dc873ffbad20b6967f}{}\label{sg__base_8h_a30c67ba4e32705dc873ffbad20b6967f} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!is\+\_\+valid\+\_\+v@{is\+\_\+valid\+\_\+v}}
+\index{is\+\_\+valid\+\_\+v@{is\+\_\+valid\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{is\+\_\+valid\+\_\+v()}{is\_valid\_v()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} is\+\_\+valid\+\_\+v (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that checks whether the vector is valid 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the vector is valid, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a27b05aa346f584407139a4174d6317e4}{}\label{sg__base_8h_a27b05aa346f584407139a4174d6317e4} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!minors@{minors}}
+\index{minors@{minors}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{minors()}{minors()}}
+{\footnotesize\ttfamily \hyperlink{structsg__matrix}{sg\+\_\+matrix} minors (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{src,  }\item[{size\+\_\+t}]{row,  }\item[{size\+\_\+t}]{col }\end{DoxyParamCaption})}
+
+
+
+function that find minors 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & -\/ matrix \\
+\hline
+{\em row} & -\/ row index \\
+\hline
+{\em col} & -\/ column index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ minors of that matrix 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a63d73b9984fff7774179d21d2809738a}{}\label{sg__base_8h_a63d73b9984fff7774179d21d2809738a} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!mult\+\_\+mm@{mult\+\_\+mm}}
+\index{mult\+\_\+mm@{mult\+\_\+mm}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{mult\+\_\+mm()}{mult\_mm()}}
+{\footnotesize\ttfamily void mult\+\_\+mm (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat1,  }\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat2,  }\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that multiplies two matrices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat1} & -\/ first matrix \\
+\hline
+{\em mat2} & -\/ second matrix \\
+\hline
+{\em res} & -\/ result matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a73a89845cedb246c73320ba0c37645d6}{}\label{sg__base_8h_a73a89845cedb246c73320ba0c37645d6} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!mult\+\_\+mv@{mult\+\_\+mv}}
+\index{mult\+\_\+mv@{mult\+\_\+mv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{mult\+\_\+mv()}{mult\_mv()}}
+{\footnotesize\ttfamily void mult\+\_\+mv (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that multiplies matrix and vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em vec} & -\/ vector \\
+\hline
+{\em res} & -\/ result vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a43ecca236b23b815163f59d9a4633880}{}\label{sg__base_8h_a43ecca236b23b815163f59d9a4633880} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!mult\+\_\+vm@{mult\+\_\+vm}}
+\index{mult\+\_\+vm@{mult\+\_\+vm}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{mult\+\_\+vm()}{mult\_vm()}}
+{\footnotesize\ttfamily void mult\+\_\+vm (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec,  }\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that multiplies vector and matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+{\em mat} & -\/ matrix \\
+\hline
+{\em res} & -\/ result matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_aee2a61ec029d4d419a0838d5d4786700}{}\label{sg__base_8h_aee2a61ec029d4d419a0838d5d4786700} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!norm\+\_\+m@{norm\+\_\+m}}
+\index{norm\+\_\+m@{norm\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{norm\+\_\+m()}{norm\_m()}}
+{\footnotesize\ttfamily size\+\_\+t norm\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat }\end{DoxyParamCaption})}
+
+
+
+function that finds norm of matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the matrix is valid, return norm of matrix. Otherwise, return -\/1. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_abe30c86d36c343438bf34f24d80eb924}{}\label{sg__base_8h_abe30c86d36c343438bf34f24d80eb924} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!norm\+\_\+v@{norm\+\_\+v}}
+\index{norm\+\_\+v@{norm\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{norm\+\_\+v()}{norm\_v()}}
+{\footnotesize\ttfamily size\+\_\+t norm\+\_\+v (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that finds norm of vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the vector is valid, return norm of vector. Otherwise, return -\/1. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a3b3f7dfc24dde1d25e9d86a56d411dee}{}\label{sg__base_8h_a3b3f7dfc24dde1d25e9d86a56d411dee} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!print\+\_\+m@{print\+\_\+m}}
+\index{print\+\_\+m@{print\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+m()}{print\_m()}}
+{\footnotesize\ttfamily void print\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat }\end{DoxyParamCaption})}
+
+
+
+function that prints matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a9bf1bbe0990092bf7718d8b424200451}{}\label{sg__base_8h_a9bf1bbe0990092bf7718d8b424200451} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!print\+\_\+v@{print\+\_\+v}}
+\index{print\+\_\+v@{print\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{print\+\_\+v()}{print\_v()}}
+{\footnotesize\ttfamily void print\+\_\+v (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that prints vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_abb9477581543b0b1ab44c0d5e7ac5476}{}\label{sg__base_8h_abb9477581543b0b1ab44c0d5e7ac5476} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!put\+\_\+m@{put\+\_\+m}}
+\index{put\+\_\+m@{put\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{put\+\_\+m()}{put\_m()}}
+{\footnotesize\ttfamily void put\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{const size\+\_\+t}]{row,  }\item[{const size\+\_\+t}]{col,  }\item[{const double}]{val }\end{DoxyParamCaption})}
+
+
+
+function that puts the value into the matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em row} & -\/ row index \\
+\hline
+{\em col} & -\/ column index \\
+\hline
+{\em val} & -\/ value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a4a5c3f2cfea969b9d0aebf99dcf28b6f}{}\label{sg__base_8h_a4a5c3f2cfea969b9d0aebf99dcf28b6f} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!put\+\_\+v@{put\+\_\+v}}
+\index{put\+\_\+v@{put\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{put\+\_\+v()}{put\_v()}}
+{\footnotesize\ttfamily void put\+\_\+v (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec,  }\item[{const size\+\_\+t}]{index,  }\item[{const double}]{val }\end{DoxyParamCaption})}
+
+
+
+function that puts the value into the vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+{\em index} & -\/ index \\
+\hline
+{\em val} & -\/ value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a1103516c4614ef78fbdb566e74550cf9}{}\label{sg__base_8h_a1103516c4614ef78fbdb566e74550cf9} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!release\+\_\+m@{release\+\_\+m}}
+\index{release\+\_\+m@{release\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{release\+\_\+m()}{release\_m()}}
+{\footnotesize\ttfamily void release\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat }\end{DoxyParamCaption})}
+
+
+
+function that releases matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_afc6a7d1674e0f1d455978f0614a714e2}{}\label{sg__base_8h_afc6a7d1674e0f1d455978f0614a714e2} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!release\+\_\+v@{release\+\_\+v}}
+\index{release\+\_\+v@{release\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{release\+\_\+v()}{release\_v()}}
+{\footnotesize\ttfamily void release\+\_\+v (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec }\end{DoxyParamCaption})}
+
+
+
+function that releases vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ae778afe493df09153fd78225a8827c65}{}\label{sg__base_8h_ae778afe493df09153fd78225a8827c65} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!replace\+\_\+rows\+\_\+m@{replace\+\_\+rows\+\_\+m}}
+\index{replace\+\_\+rows\+\_\+m@{replace\+\_\+rows\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{replace\+\_\+rows\+\_\+m()}{replace\_rows\_m()}}
+{\footnotesize\ttfamily void replace\+\_\+rows\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{int}]{row1,  }\item[{int}]{row2 }\end{DoxyParamCaption})}
+
+
+
+function that replaces rows of matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em row1} & -\/ first row index \\
+\hline
+{\em row2} & -\/ second row index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a5944bcd308ec1166dba9f72d2993f7e0}{}\label{sg__base_8h_a5944bcd308ec1166dba9f72d2993f7e0} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!scale\+\_\+m@{scale\+\_\+m}}
+\index{scale\+\_\+m@{scale\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{scale\+\_\+m()}{scale\_m()}}
+{\footnotesize\ttfamily void scale\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{const double}]{val }\end{DoxyParamCaption})}
+
+
+
+function that scales matrix with a number 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em val} & -\/ value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a0e0e0944fa847628a9edbaa800d7c2dc}{}\label{sg__base_8h_a0e0e0944fa847628a9edbaa800d7c2dc} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!scale\+\_\+v@{scale\+\_\+v}}
+\index{scale\+\_\+v@{scale\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{scale\+\_\+v()}{scale\_v()}}
+{\footnotesize\ttfamily void scale\+\_\+v (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec,  }\item[{const double}]{val }\end{DoxyParamCaption})}
+
+
+
+function that scales vector with a number 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+{\em val} & -\/ value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a57d12d6b8bcebb119850868e15bace35}{}\label{sg__base_8h_a57d12d6b8bcebb119850868e15bace35} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!sub\+\_\+mm@{sub\+\_\+mm}}
+\index{sub\+\_\+mm@{sub\+\_\+mm}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{sub\+\_\+mm()}{sub\_mm()}}
+{\footnotesize\ttfamily void sub\+\_\+mm (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat1,  }\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat2,  }\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that subtracts two matrices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat1} & -\/ first matrix \\
+\hline
+{\em mat2} & -\/ second matrix \\
+\hline
+{\em res} & -\/ result matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a0c1ab3a32cc38d60128d15dcd912e18e}{}\label{sg__base_8h_a0c1ab3a32cc38d60128d15dcd912e18e} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!sub\+\_\+vv@{sub\+\_\+vv}}
+\index{sub\+\_\+vv@{sub\+\_\+vv}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{sub\+\_\+vv()}{sub\_vv()}}
+{\footnotesize\ttfamily void sub\+\_\+vv (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec1,  }\item[{const \hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec2,  }\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{res }\end{DoxyParamCaption})}
+
+
+
+function that subtracts two vectors 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec1} & -\/ first vector \\
+\hline
+{\em vec2} & -\/ second vector \\
+\hline
+{\em res} & -\/ result vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ae828bc6b7acac7b9c6f0db4084340717}{}\label{sg__base_8h_ae828bc6b7acac7b9c6f0db4084340717} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!to\+\_\+m@{to\+\_\+m}}
+\index{to\+\_\+m@{to\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{to\+\_\+m()}{to\_m()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} to\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{double $\ast$$\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+function that converts data array to matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em data} & -\/ data array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the convertion is success, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_aec321ab4e3472d8267e42652725bb94f}{}\label{sg__base_8h_aec321ab4e3472d8267e42652725bb94f} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!to\+\_\+v@{to\+\_\+v}}
+\index{to\+\_\+v@{to\+\_\+v}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{to\+\_\+v()}{to\_v()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} to\+\_\+v (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__vector}{sg\+\_\+vector}}]{vec,  }\item[{double $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+function that converts data array to vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & -\/ vector \\
+\hline
+{\em data} & -\/ data array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the convertion is success, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_a6ecd0e7e8ce6c97cef3cdf8c68952f73}{}\label{sg__base_8h_a6ecd0e7e8ce6c97cef3cdf8c68952f73} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!trace\+\_\+m@{trace\+\_\+m}}
+\index{trace\+\_\+m@{trace\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{trace\+\_\+m()}{trace\_m()}}
+{\footnotesize\ttfamily \hyperlink{sg__types_8h_a7c6fa392da179db2bbc5f2be18baf926}{sg\+\_\+bool} trace\+\_\+m (\begin{DoxyParamCaption}\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{mat,  }\item[{double $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+function that gets sum of diagonal elements of square matrix 
+
+\begin{DoxyNote}{Note}
+if the matrix is valid, t is set to trace. Otherwise, set to N\+U\+LL. 
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+the matrix must be square. 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & -\/ matrix \\
+\hline
+{\em t} & -\/ trace value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if the operation is successfully, return S\+G\+\_\+\+T\+R\+UE. Otherwise, return S\+G\+\_\+\+F\+A\+L\+SE. 
+\end{DoxyReturn}
+\hypertarget{sg__base_8h_ab8b057de5e66761ab06e4877507824e3}{}\label{sg__base_8h_ab8b057de5e66761ab06e4877507824e3} 
+\index{sg\+\_\+base.\+h@{sg\+\_\+base.\+h}!transpose\+\_\+m@{transpose\+\_\+m}}
+\index{transpose\+\_\+m@{transpose\+\_\+m}!sg\+\_\+base.\+h@{sg\+\_\+base.\+h}}
+\subsubsection{\texorpdfstring{transpose\+\_\+m()}{transpose\_m()}}
+{\footnotesize\ttfamily void transpose\+\_\+m (\begin{DoxyParamCaption}\item[{const \hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{src,  }\item[{\hyperlink{structsg__matrix}{sg\+\_\+matrix}}]{des }\end{DoxyParamCaption})}
+
+
+
+function that transposes the source matrix and copies it to destination matrix 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & -\/ source matrix \\
+\hline
+{\em des} & -\/ destination matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ 
+\end{DoxyReturn}
