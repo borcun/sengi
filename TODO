@@ -4,3 +4,9 @@
 
 ! put functions can not work in Mac OS X because segmentation fault occurs.
 ! do not use size_t counter in any loop which counts down because of counter overflow
+
+22.01.19
+- remove column and row vectors, implement vector only.
+- single header, single library and cross platform (if must, use preprocessor directives)
+- function names to camel notation
+- memory pool for allocation & deallocation?
